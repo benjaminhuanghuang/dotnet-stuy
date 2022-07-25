@@ -15,7 +15,30 @@ Mocking libraries
 - MS Fakes
 
 
-
+- Run test
 ```
 dotnet test
 ```
+
+
+- Mock testing
+
+Using interface, mock the storage
+
+```
+  var mockManager = new Mock<IShoppingCartManager>();
+
+  mockManager.Setup(manager => manager.AddToCart(
+      It.IsAny<AddToCartRequest>())).Returns(
+          (AddToCartRequest request) => new AddToCartResponse()
+          {
+              Items = new AddToCartItem[] { request.Item }
+          }
+      );
+
+  //var manager = new ShoppingCartManager();
+```
+
+
+
+
