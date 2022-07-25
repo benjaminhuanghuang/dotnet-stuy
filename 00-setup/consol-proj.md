@@ -4,6 +4,11 @@ dotnet --list-sdks        Display the installed SDKs.
 dotnet --list-runtimes    Display the installed runtimes.
 ```
 
+Install template
+
+```
+  npm install generator-xxx
+```
 
 Create proj
 ```
