@@ -36,6 +36,20 @@
         "${workspaceFolder}/hello/hello.csproj"
       ],
       "problemMatcher": "$msCompile"
-    }
+    },
+    {
+      "label": "test",
+      "command": "dotnet",
+      "type": "shell",
+      "group": "test",
+      "args": [
+          "test",
+          "${workspaceFolder}/Web-App-TDD/demo/HPlusSportTDD.Core.Tests/HPlusSportTDD.Core.Tests.csproj"
+      ],
+      "presentation": {
+          "reveal": "silent"
+      },
+      "problemMatcher": "$msCompile"
+  }
   ]
 }

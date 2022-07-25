@@ -13,3 +13,9 @@ Mocking libraries
 - NSubstitute
 - FakeItEasy 
 - MS Fakes
+
+
+
+```
+dotnet test
+```
