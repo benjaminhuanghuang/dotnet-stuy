@@ -10,4 +10,8 @@ Create proj
   dotnet new console -o hello
 ```
 
+Change .net version in .csproj file
+```
+  <TargetFramework>net6.0</TargetFramework>
+```
 
