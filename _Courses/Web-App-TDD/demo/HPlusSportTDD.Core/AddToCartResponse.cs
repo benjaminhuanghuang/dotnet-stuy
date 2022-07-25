@@ -1,6 +1,6 @@
 ﻿namespace HPlusSportTDD.Core
 {
-    internal class AddToCartResponse
+    public class AddToCartResponse
     {
 
         public AddToCartItem[] Items { get; set; }
