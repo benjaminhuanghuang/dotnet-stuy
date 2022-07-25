@@ -22,7 +22,11 @@ dotnet test
 
 
 - Mock testing
-
+```
+  <PackageReference Include="Moq" Version="4.16.1" />    
+  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.9" />
+  <PackageReference Include="Moq.EntityFrameworkCore" Version="5.0.0.2" />
+```
 Using interface, mock the storage
 
 ```

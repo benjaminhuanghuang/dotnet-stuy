@@ -3,36 +3,36 @@ using System.Collections.Generic;
 
 namespace HPlusSportTDD.Core
 {
-    public class ShoppingCartManager : IShoppingCartManager
+  public class ShoppingCartManager : IShoppingCartManager
+  {
+    private List<AddToCartItem> _shoppingCart;
+
+    public ShoppingCartManager()
     {
-        private List<AddToCartItem> _shoppingCart;
-
-        public ShoppingCartManager()
-        {
-            _shoppingCart = new List<AddToCartItem>();
-        }
-
-        public AddToCartResponse AddToCart(AddToCartRequest request)
-        {
-            var item = _shoppingCart.Find(i => i.ArticleId == request.Item.ArticleId);
-            if (item != null)
-            {
-                item.Quantity += request.Item.Quantity;
-            }
-            else
-            {
-                _shoppingCart.Add(request.Item);
-            }
-
-            return new AddToCartResponse()
-            {
-                Items = _shoppingCart.ToArray()
-            };
-        }
-
-        public IEnumerable<AddToCartItem> GetCart()
-        {
-            return _shoppingCart.ToArray();
-        }
+      _shoppingCart = new List<AddToCartItem>();
     }
+
+    public AddToCartResponse AddToCart(AddToCartRequest request)
+    {
+      var item = _shoppingCart.Find(i => i.ArticleId == request.Item.ArticleId);
+      if (item != null)
+      {
+        item.Quantity += request.Item.Quantity;
+      }
+      else
+      {
+        _shoppingCart.Add(request.Item);
+      }
+
+      return new AddToCartResponse()
+      {
+        Items = _shoppingCart.ToArray()
+      };
+    }
+
+    public IEnumerable<AddToCartItem> GetCart()
+    {
+      return _shoppingCart.ToArray();
+    }
+  }
 }

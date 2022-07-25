@@ -1,11 +1,11 @@
 ﻿namespace HPlusSportTDD.Core
 {
-    public class AddToCartRequest
+  public class AddToCartRequest
+  {
+    public AddToCartRequest()
     {
-        public AddToCartRequest()
-        {
-        }
-
-        public AddToCartItem Item { get; set; }
     }
+
+    public AddToCartItem Item { get; set; }
+  }
 }
