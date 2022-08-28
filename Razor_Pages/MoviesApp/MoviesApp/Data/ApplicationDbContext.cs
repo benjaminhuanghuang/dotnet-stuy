@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MoviesApp.Data.Models;
-using System.Collections.Generic;
 
 namespace MoviesApp.Data
 {

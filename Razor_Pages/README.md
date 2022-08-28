@@ -51,7 +51,9 @@ ASP.NET Razor Pages is a server-side, page-focused framework that enables buildi
 
 
 ## Entity Framework
-- Install
+Tools > NuGet Package Manager > 
+
+Install
     - Microsoft.EntityFrameworkCore
     - Microsoft.EntityFrameworkCore.SqlServer
     - Microsoft.EntityFrameworkCore.Tools
@@ -64,11 +66,25 @@ Create DB in the Server Explorer in VS
 appsettings.json
 
   "ConnectionStrings": {
-    "DefautConnection": "Data Source=BENTKPAD\\SQLEXPRESS;Initial Catalog=MoviesApp-Db;Integrated Security=True;Pooling=False"
+    "DefaultConnection": "Data Source=BENTKPAD\\SQLEXPRESS;Initial Catalog=MoviesApp-Db;Integrated Security=True;Pooling=False"
   }
 ```
 3. Config Entity Framework Core
-Tools > NuGet Package Manager > 
+Create ApplicationDbContext
+
+```
+// program.cs
+builder.Services.AddScoped<IMoviesService, MoviesService>();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+```
 
 
+4. Init
+Tools > NuGet Package Manager > Package Manager Console
+```
+    PM> Add-Migration Initial
 
+    PM> Update-Database
+```
