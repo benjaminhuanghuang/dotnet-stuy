@@ -88,3 +88,14 @@ Tools > NuGet Package Manager > Package Manager Console
 
     PM> Update-Database
 ```
+
+
+
+## Service
+Inject service
+
+```
+    // Program.cs
+    
+    builder.Services.AddScoped<IMoviesService, MoviesService>();
+```
