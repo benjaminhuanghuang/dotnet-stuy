@@ -1,24 +1,14 @@
-## Entity Framework
+## Install Entity Framework
 Tools > NuGet Package Manager > 
+or 
+Project > Dependencies > Manage NuGet Packages
+
 
 Install
-    - Microsoft.EntityFrameworkCore
-    - Microsoft.EntityFrameworkCore.SqlServer
-    - Microsoft.EntityFrameworkCore.Tools
+  - Microsoft.EntityFrameworkCore
+  - Microsoft.EntityFrameworkCore.SqlServer
+  - Microsoft.EntityFrameworkCore.Tools
+  - Microsoft.EntityFrameworkCore.Design
 
 
-Create DB in the Server Explorer in VS
-
-Get connection str
-```
-appsettings.json
-
-  "ConnectionStrings": {
-    "DefautConnection": "Data Source=BENTKPAD\\SQLEXPRESS;Initial Catalog=MoviesApp-Db;Integrated Security=True;Pooling=False"
-  }
-```
-
-create ApplicationDbContext
-```
-```
 
