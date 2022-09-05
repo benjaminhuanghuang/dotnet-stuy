@@ -1,0 +1,3 @@
+```
+  dotnet -o c:\web
+```
