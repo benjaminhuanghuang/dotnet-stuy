@@ -12,3 +12,13 @@ Install
 
 
 
+
+## Install EF tooling
+```
+  dotnet tool instal dotnet-ef
+
+  # install globally
+  dotnet tool instal dotnet-ef -g
+
+  dotnet ef --help
+```
