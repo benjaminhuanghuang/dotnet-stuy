@@ -14,3 +14,8 @@ Install
 ```
  add-migration init-mig
 ```
+
+## Update db
+```
+    update-database
+```

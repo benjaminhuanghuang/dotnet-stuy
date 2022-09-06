@@ -24,7 +24,7 @@ namespace EFCore_CodeFirst
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string connString = @"server=BENTKPAD\SQLEXPRESS;database=efcoreDb;trusted_connection=true;MultipleActiveResutlSets=true";
+            string connString = @"server=BENTKPAD\SQLEXPRESS;database=efcoreDb;trusted_connection=true;MultipleActiveResultSets=true";
             
             optionsBuilder.UseSqlServer(connString);
 
