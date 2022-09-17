@@ -8,17 +8,21 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 	}
+    string translatedNumber;
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
+    private void OnTranslate(object sender, EventArgs e)
+    {
+        string enteredNumber = PhoneNumberText.Text;
+        translatedNumber = Core.PhonewordTranslator.ToNumber(enteredNumber);
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+        if (!string.IsNullOrEmpty(translatedNumber))
+        {
+            // TODO:
+        }
+        else
+        {
+            // TODO:
+        }
+    }
 }
 
