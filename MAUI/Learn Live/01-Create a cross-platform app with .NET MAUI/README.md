@@ -47,3 +47,6 @@ The App class also contains: Methods for handling life-cycle events and Methods 
 
 ## Build and run the application on Android
 - Create a Android Device
+
+
+## Update the Android application manifest to enable Android to use the phone
