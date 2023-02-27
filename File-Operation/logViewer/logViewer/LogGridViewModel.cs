@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Text.Encodings.Web;
 using System.Text.Json.Nodes;
 using System.Windows.Shapes;
 
@@ -27,7 +28,12 @@ namespace PBiLogViewer
                 var (queryType, query) = GetQuery(log);
                 if (queryType != null && query != null)
                 {
-                    QueryModels.Insert(0, new QueryModel(lineNumber, queryType.Value, query));
+                    if ((queryType == QueryType.SQ || queryType == QueryType.DSQ) && App.Current.Options.QueryConfiguration[queryType.Value].Format)
+                    {
+                        query = JsonNode.Parse(query)?.ToJsonString(new System.Text.Json.JsonSerializerOptions() { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+                    }
+
+                    QueryModels.Insert(0, new QueryModel(lineNumber, queryType.Value, query ?? String.Empty));
                 }
                 lineNumber++;
             }
