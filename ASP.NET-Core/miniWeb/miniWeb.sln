@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "miniWeb", "miniWeb\miniWeb.csproj", "{32EC3E15-D179-4FCD-993B-668D98CECE11}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32EC3E15-D179-4FCD-993B-668D98CECE11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32EC3E15-D179-4FCD-993B-668D98CECE11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32EC3E15-D179-4FCD-993B-668D98CECE11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32EC3E15-D179-4FCD-993B-668D98CECE11}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2016732E-756E-4F74-8169-C7E606936943}
+	EndGlobalSection
+EndGlobal
