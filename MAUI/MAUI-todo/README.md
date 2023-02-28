@@ -32,10 +32,14 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 
 Run command in terminal under project folder
 ``` 
+    // install ef tools
     dotnet tool install --global dotnet-ef
     dotnet tool update --global dotnet-ef
 
     // create migration
     dotnet ef migrations add init
+
+    // create database
+    dotnet ef database update
 ```
 
