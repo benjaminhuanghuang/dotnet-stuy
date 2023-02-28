@@ -29,3 +29,13 @@ connect to db
 builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
 ```
+
+Run command in terminal under project folder
+``` 
+    dotnet tool install --global dotnet-ef
+    dotnet tool update --global dotnet-ef
+
+    // create migration
+    dotnet ef migrations add init
+```
+

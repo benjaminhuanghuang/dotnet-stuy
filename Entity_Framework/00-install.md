@@ -4,21 +4,27 @@ or
 Project > Dependencies > Manage NuGet Packages
 
 
-Install
+Install packages
+```
   - Microsoft.EntityFrameworkCore
   - Microsoft.EntityFrameworkCore.SqlServer
+  - Microsoft.EntityFrameworkCore.Sqlite
   - Microsoft.EntityFrameworkCore.Tools
   - Microsoft.EntityFrameworkCore.Design
-
+```
 
 
 
 ## Install EF tooling
 ```
-  dotnet tool instal dotnet-ef
-
   # install globally
-  dotnet tool instal dotnet-ef -g
+  dotnet tool install dotnet-ef -g
+  or
+  dotnet tool install --global dotnet-ef
+  
+  # update
+  dotnet tool update --global dotnet-ef
 
+  
   dotnet ef --help
 ```
