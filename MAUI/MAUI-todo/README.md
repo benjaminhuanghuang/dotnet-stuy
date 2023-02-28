@@ -16,3 +16,16 @@ Microsoft.EntityFrameworkCore.Sqlite
 Microsoft.EntityFrameworkCore.Design
 ```
 
+## Create database
+connect string
+```
+// appsettings.Development.json
+SqliteConnection": "Data Source=ToDo.db"
+```
+
+connect to db
+```
+// Program.cs
+builder.Services.AddDbContext<AppDbContext>(opt =>
+    opt.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
+```
