@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Diagnostics;
-
+using ToDoMauiClient.Models;
 
 namespace ToDoMauiClient.DataServices
 {
@@ -29,8 +29,6 @@ namespace ToDoMauiClient.DataServices
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             };
         }
-
-
 
         public async Task AddToDoAsync(ToDo toDo)
         {

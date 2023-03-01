@@ -54,3 +54,33 @@ Run command in terminal under project folder
 ### Create project
 .NET MAUI App
 
+### Models
+
+### DataServices
+
+Register DataServices for dependency injection
+```
+builder.Services.AddSingleton<IRestDataService, RestDataService>();
+```
+
+## Setup for Android
+Tools > Android > Android Device Manager
+
+Windows Developer settings > Enable 'Developer Mode'
+
+Run > Android Emulators > 
+
+Create Platform/Android/Resources/xml/network_security_config.xml
+```
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+	<domain-config cleartextTrafficPermitted="true">
+		<domain includeSubdomains="true">10.0.2.2</domain>
+	</domain-config>
+</network-security-config>
+```
+
+Modify \Platforms\Android\AndroidManifest.xml
+```
+<application android:networkSecurityConfig="@xml/network_security_config" android:allowBackup="true" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true"></application>
+```
