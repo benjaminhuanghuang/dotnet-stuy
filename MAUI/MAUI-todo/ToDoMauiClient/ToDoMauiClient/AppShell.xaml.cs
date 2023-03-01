@@ -1,4 +1,6 @@
-﻿namespace ToDoMauiClient;
+﻿using ToDoMauiClient.Pages;
+
+namespace ToDoMauiClient;
 
 public partial class AppShell : Shell
 {

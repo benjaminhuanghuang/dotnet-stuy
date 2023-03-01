@@ -45,6 +45,19 @@ Run command in terminal under project folder
 
 
 ### URL
+
+Modify launchSettings.json
+```
+"ToDoAPI": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7209;http://localhost:5209",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+```
+
 ```
     https://localhost:5225/api/todo
 ```
