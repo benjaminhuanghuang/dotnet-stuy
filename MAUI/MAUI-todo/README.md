@@ -10,13 +10,13 @@ Create 'ASP.NET Core Web API'
 Uncheck 'Use controllers'
 Uncheck 'Enable OpenAPI support'
 
-## Install packages
+### Install packages
 ```
 Microsoft.EntityFrameworkCore.Sqlite
 Microsoft.EntityFrameworkCore.Design
 ```
 
-## Create database
+### Create database
 connect string
 ```
 // appsettings.Development.json
@@ -42,4 +42,15 @@ Run command in terminal under project folder
     // create database
     dotnet ef database update
 ```
+
+
+### URL
+```
+    https://localhost:5225/api/todo
+```
+
+
+## Client side
+### Create project
+.NET MAUI App
 
