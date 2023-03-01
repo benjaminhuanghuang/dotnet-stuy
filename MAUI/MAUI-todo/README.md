@@ -62,7 +62,10 @@ Register DataServices for dependency injection
 ```
 builder.Services.AddSingleton<IRestDataService, RestDataService>();
 ```
-
+### Install
+```
+    Microsoft.Extensions.Http
+```
 ## Setup for Android
 Tools > Android > Android Device Manager
 
