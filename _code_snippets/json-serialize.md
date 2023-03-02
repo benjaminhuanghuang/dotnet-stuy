@@ -1,6 +1,10 @@
 
 ```
+// Install Package: Newtonsoft.Json
 // Clone method in Manager : Person
+
+using Newtonsoft.Json;
+
 public override Person Clone(bool deepClone = false)
 {
     if (deepClone)
