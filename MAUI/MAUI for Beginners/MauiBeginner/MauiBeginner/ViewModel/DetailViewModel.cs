@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace MauiBeginner.ViewModel
+namespace MauiBegineer.ViewModel
 {
     [QueryProperty("Text", "Text")]
     public partial class DetailViewModel : ObservableObject
