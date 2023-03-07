@@ -29,3 +29,11 @@ Data binding
     </CollectionView.ItemTemplate>
 </CollectionView>
 ```
+
+Using ItemsSource
+```
+    <CollectionView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding Items}" SelectionMode="None">
+        <CollectionView.ItemTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+```
