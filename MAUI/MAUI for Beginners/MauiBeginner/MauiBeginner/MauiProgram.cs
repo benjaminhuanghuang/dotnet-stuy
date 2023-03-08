@@ -1,4 +1,5 @@
-﻿using MauiBeginner.ViewModel;
+﻿using MauiBegineer.ViewModel;
+using MauiBeginner.ViewModel;
 using Microsoft.Extensions.Logging;
 
 namespace MauiBeginner;
@@ -21,7 +22,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddSingleton<MainViewModel>();
 
-
+		// 
         builder.Services.AddTransient<DetailPage>();
         builder.Services.AddTransient<DetailViewModel>();
 #if DEBUG

@@ -14,6 +14,8 @@ Shell includes a built-in dependency service to do constructor injection and dep
 
 Shell also enables us to do a URI-based navigation
 
+
+Register the router
 ```
     public AppShell() {
 
@@ -21,7 +23,37 @@ Shell also enables us to do a URI-based navigation
     }
 ```
 
-
+Trigger navigation in Xaml
 ```
-    await Shell.Current.GoToAsync($"{nameof(DetailPage)}?Query={query}", new Directory<string, object> {});
+<Frame>
+    <Frame.GestureRecognizers>
+        <TapGestureRecognizer 
+                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=TapCommand}"
+                CommandParameter="{Binding .}"/>
+    </Frame.GestureRecognizers>
+<Frame>
+```
+Code behind
+```
+    [RelayCommand]
+    async Task Tap(string s)
+    {
+        await Shell.Current.GoToAsync($"{nameof(DetailPage)}?Text={s}");
+    }
+```
+
+Accept parameter
+```
+[QueryProperty("Text", "Text")]
+public partial class DetailViewModel : ObservableObject
+{
+    [ObservableProperty]
+    string text;
+
+    [RelayCommand]
+    async Task GoBack()
+    {
+        await Shell.Current.GoToAsync("..");
+    }
+}
 ```
