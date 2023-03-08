@@ -42,7 +42,7 @@ Code behind
     }
 ```
 
-Accept parameter
+Accept parameter and go back
 ```
 [QueryProperty("Text", "Text")]
 public partial class DetailViewModel : ObservableObject

@@ -31,6 +31,8 @@ namespace MauiBeginner.ViewModel
             if (string.IsNullOrWhiteSpace(Text))
                 return;
 
+            Microsoft.Maui.ApplicationModel.Communication
+
             if (connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 await Shell.Current.DisplayAlert("Uh Oh!", "No Internet", "OK");
