@@ -1,4 +1,6 @@
-﻿namespace MauiBeginner;
+﻿using MauiBeginner.ViewModel;
+
+namespace MauiBeginner;
 
 public partial class MainPage : ContentPage
 {
