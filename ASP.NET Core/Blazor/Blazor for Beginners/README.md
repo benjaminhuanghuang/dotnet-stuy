@@ -26,6 +26,9 @@ Create project
 ```
 
 ## Router
+```
+@page "/counter/{startingValue:int}"
 
+```
 
 ## Bind Data
