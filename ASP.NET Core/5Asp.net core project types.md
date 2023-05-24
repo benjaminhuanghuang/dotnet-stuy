@@ -1,8 +1,17 @@
+## MVC
+- Oldest modern project type
 
-## Razor pages:  server-side web application
+
+
+
+## Razor pages
+- server-side rendered Pages
+- For really quick low overhead pages 
+
 ## Blazer
 
-## MVC
+
+
 
 ## API 
 - No UI
