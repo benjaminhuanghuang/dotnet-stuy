@@ -9,6 +9,24 @@ https://www.youtube.com/watch?v=eru2emiqow0
 
 ## Create
 
+validation use attribute
+```
+[Required]
+public string  Name { get; set; }
+```
+
+
+error message
+```
+<div asp-validation-summary="All"></div>
+```
+
+```
+ <span asp-validation-for="Category.DisplayOrder" class="text-danger"></span>
+```
+
+
+
 
 
 

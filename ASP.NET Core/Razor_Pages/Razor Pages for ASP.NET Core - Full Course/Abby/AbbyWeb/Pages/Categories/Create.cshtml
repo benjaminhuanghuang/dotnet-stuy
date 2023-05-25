@@ -9,13 +9,16 @@
             <h2 class="text-primary pl-3">Create Category</h2>
             <hr />
         </div>
+        <div asp-validation-summary="All"></div>
         <div class="mb-3">
             <label asp-for="Category.Name"/>
             <input asp-for="Category.Name" class="form-control"/>
+            <span asp-validation-for="Category.Name" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="Category.DisplayOrder" />
             <input asp-for="Category.DisplayOrder" class="form-control" />
+            <span asp-validation-for="Category.DisplayOrder" class="text-danger"></span>
         </div>
         <button type="submit" class="btn btn-primary" style="width: 150px">Create </button>
     </div>

@@ -1,4 +1,4 @@
-using AbbyWeb.Data;
+﻿using AbbyWeb.Data;
 using AbbyWeb.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -20,6 +20,9 @@ namespace AbbyWeb.Pages.Categories
 
         public async Task<IActionResult> OnPostAsync(Category category)
         {
+            if(category.Name == category.DisplayOrder.ToString()){
+                ModelState.AddModelError("DisplayOrder", "DisplayOrder cannot be the same as Name");
+            }
             if (!ModelState.IsValid)
             {
                 return Page();
