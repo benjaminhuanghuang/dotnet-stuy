@@ -24,7 +24,7 @@ namespace AbbyWeb.Pages.Categories
             {
                 return Page();
             }
-            _db.Category.Add(category);
+            await _db.Category.AddAsync(category);
             await _db.SaveChangesAsync();
             return RedirectToPage("Index");
         }

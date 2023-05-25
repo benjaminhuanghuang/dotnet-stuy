@@ -10,12 +10,12 @@
             <hr />
         </div>
         <div class="mb-3">
-            Name:
-            <input asp-for="@Model.Category.Name" type="text"/>
+            <label asp-for="Category.Name"/>
+            <input asp-for="Category.Name" class="form-control"/>
         </div>
         <div class="mb-3">
-            Display Order:
-            <input type="text" name="displayOrder" />
+            <label asp-for="Category.DisplayOrder" />
+            <input asp-for="Category.DisplayOrder" class="form-control" />
         </div>
         <button type="submit" class="btn btn-primary" style="width: 150px">Create </button>
     </div>
