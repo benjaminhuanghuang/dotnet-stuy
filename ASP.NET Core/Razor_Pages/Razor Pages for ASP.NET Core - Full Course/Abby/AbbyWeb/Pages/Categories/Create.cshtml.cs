@@ -29,6 +29,7 @@ namespace AbbyWeb.Pages.Categories
             }
             await _db.Category.AddAsync(category);
             await _db.SaveChangesAsync();
+            TempData["success"] = "Category has been created successfully";
             return RedirectToPage("Index");
         }
     }
