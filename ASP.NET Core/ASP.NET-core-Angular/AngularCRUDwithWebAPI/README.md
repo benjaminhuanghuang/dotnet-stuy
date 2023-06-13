@@ -52,6 +52,7 @@ Add Data\FullStackDbContext.cs
 
 Create connection string in appsettings.json
 ```
+    "FullStackConnectionString": "server=BenTKPAD\\SQLEXPRESS;database=FullStackDb; Trusted_Connection=true;TrustServerCertificate=True"
 ```
 
 Inject
@@ -59,3 +60,17 @@ Inject
 builder.Services.AddDbContext<FullStackDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 ```
+
+
+Tools -> NuGet Package Manager -> Package Manager Console
+```
+Add-Migration "Initial Migration"
+
+Update-Database
+```
+
+
+Add controller `EmployeesController`
+
+## Swagger
+Add package Swashbuckle.AspNetCore
