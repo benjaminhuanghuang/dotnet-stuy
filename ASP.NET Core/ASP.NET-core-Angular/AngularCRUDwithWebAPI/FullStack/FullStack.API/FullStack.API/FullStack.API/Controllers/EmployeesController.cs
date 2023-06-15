@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FullStack.API.Controllers
 {
+	[ApiController]
+	[Route("api/[controller]")]
 	public class EmployeesController : Controller
 	{
 		private readonly FullStackDbContext _fullStackDbContext;

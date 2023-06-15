@@ -3,7 +3,7 @@ https://www.youtube.com/watch?v=CdE6rVfPJ9I&t=139s
 
 
 
-## Setup
+## Setup angular project
 ```
 ng new FullStack.UI
 ```
@@ -14,7 +14,7 @@ copy Nav code to app.component.html
 
 
 
-## employee-list
+## Create employee-list component/page
 Create component
 ```
     ng g c employee-list
@@ -41,7 +41,7 @@ Use Employee in employee-list component
 Add table in employee-list.component.html
 
 
-## Init server side
+## Init server side Web API project
 Create project `ASP.NET Core Web API`
 
 Add dependencies EntityFrameworkCore, EntityFrameworkCore.SqlServer and EntityFrameworkCore.Tools
@@ -61,7 +61,7 @@ builder.Services.AddDbContext<FullStackDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 ```
 
-
+Create database
 Tools -> NuGet Package Manager -> Package Manager Console
 ```
 Add-Migration "Initial Migration"
@@ -73,4 +73,22 @@ Update-Database
 Add controller `EmployeesController`
 
 ## Swagger
-Add package Swashbuckle.AspNetCore
+Install package Swashbuckle.AspNetCore
+
+Use Swagger in the Program.cs
+```
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen( c=>
+{
+	c.SwaggerDoc("v1", new() { Title = "FullStack.API", Version = "v1" });
+});
+
+
+if (app.Environment.IsDevelopment())
+{
+	app.UseSwagger();
+	app.UseSwaggerUI();
+}
+
+```
