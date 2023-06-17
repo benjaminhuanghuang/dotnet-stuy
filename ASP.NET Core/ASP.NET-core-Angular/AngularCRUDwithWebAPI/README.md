@@ -92,3 +92,32 @@ if (app.Environment.IsDevelopment())
 }
 
 ```
+
+
+## Client employee-list
+```
+cd services
+
+ng g s employees
+```
+
+Add to tsconfig.json to tell VSCode where to find the types
+```
+"typeRoots":[
+    "node_modules/@types",
+    "node_modules/@angular",
+    "node_modules/@angular/common/http"
+]
+```
+
+Add baseApiUrl to environment.ts
+```
+ baseApiUrl: "https://localhost:7001"
+```
+
+Access the API in employees.service.ts
+```
+ getAllEmployees(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(this.baseApiUrl + '/api/employees');
+  }
+```
