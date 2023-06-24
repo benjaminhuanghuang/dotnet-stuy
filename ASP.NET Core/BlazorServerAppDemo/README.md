@@ -23,3 +23,26 @@ Project name: UseCases
 Add new project
 Class Library
 Project name: CoreBusiness
+
+Add new project
+Class Library
+Project name: Plugins.DataStore.InMemory
+We are creating a InMemory data store first for rapid development, then swap it with SQL database later.
+
+
+Dependency injection
+```
+// Dependency injection for In-Memory data store
+builder.Services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
+// Dependency injection for Use cases
+builder.Services.AddTransient<IViewCategoriesUseCase, ViewCategoriesUseCase>();
+
+```
+
+Add Razor component under Pages folder
+
+Add dependencies into _imports
+```
+@using CoreBusiness
+```
+## CategoriesComponent.razor
