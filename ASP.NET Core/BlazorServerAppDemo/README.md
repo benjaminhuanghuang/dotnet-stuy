@@ -51,6 +51,6 @@ Add dependencies into _imports
 ## AddCategoryComponent.razor
 
 
-## EditCategory
+## GetCategoryById and EditCategory 
 
-## GetCategoryById
+## Delete

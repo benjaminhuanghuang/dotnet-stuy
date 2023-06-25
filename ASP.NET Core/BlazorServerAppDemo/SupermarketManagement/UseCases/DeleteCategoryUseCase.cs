@@ -9,18 +9,18 @@ using UseCases.UseCaseInterfaces;
 
 namespace UseCases
 {
-    public class GetCategoryByIdUseCase: IGetCategoryByIdUseCase
+    public class DeleteCategoryUseCase : IDeleteCategoryUseCase
     {
         private readonly ICategoryRepository _categoryRepository;
 
-        public GetCategoryByIdUseCase(ICategoryRepository categoryRepository)
+        public DeleteCategoryUseCase(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
         }
 
-        public Category GetCategoryById(int categoryId)
+        public void Delete(int categoryId)
         {
-            return _categoryRepository.GetCategoryById(categoryId);
+            _categoryRepository.DeleteCategory(categoryId);
         }
     }
 }

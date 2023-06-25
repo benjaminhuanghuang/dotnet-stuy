@@ -37,14 +37,19 @@ namespace Plugins.DataStore.InMemory
 
             if (categoryToUpdate != null)
 			{
-				categoryToUpdate = category;
+				categoryToUpdate.Name = category.Name;
+				categoryToUpdate.Description = category.Description;
             }
 		}
 
         public Category GetCategoryById(int categoryId)
 		{
-            return _categories.FirstOrDefault(x => x.CategoryId == categoryId);
+            return _categories?.FirstOrDefault(x => x.CategoryId == categoryId);
         }
 
+		public void DeleteCategory(int categoryId)
+		{
+			_categories.Remove(this.GetCategoryById(categoryId));
+		}
     }
 }
