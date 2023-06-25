@@ -1,4 +1,5 @@
 ﻿using CoreBusiness;
+using System.Xml.Linq;
 using UseCases.DataStorePluginInterfaces;
 
 namespace Plugins.DataStore.InMemory
@@ -17,9 +18,33 @@ namespace Plugins.DataStore.InMemory
 		}
 
 
-		IEnumerable<Category> ICategoryRepository.GetCategoreis()
+		public IEnumerable<Category> GetCategoreis()
 		{
 			return this._categories;
 		}
-	}
+		 
+ 		public void AddCategory(Category category)
+		{
+            if (_categories.Any(x => x.Name.Equals(category.Name, StringComparison.OrdinalIgnoreCase))) return;
+            var maxId = _categories.Max(x => x.CategoryId);
+            category.CategoryId = maxId + 1;
+            _categories.Add(category);
+        }
+
+		public void UpdateCategory(Category category)
+		{
+			var categoryToUpdate = this.GetCategoryById(category.CategoryId);
+
+            if (categoryToUpdate != null)
+			{
+				categoryToUpdate = category;
+            }
+		}
+
+        public Category GetCategoryById(int categoryId)
+		{
+            return _categories.FirstOrDefault(x => x.CategoryId == categoryId);
+        }
+
+    }
 }

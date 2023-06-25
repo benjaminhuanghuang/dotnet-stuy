@@ -46,3 +46,11 @@ Add dependencies into _imports
 @using CoreBusiness
 ```
 ## CategoriesComponent.razor
+
+
+## AddCategoryComponent.razor
+
+
+## EditCategory
+
+## GetCategoryById
