@@ -9,19 +9,19 @@ using UseCases.UseCaseInterfaces;
 
 namespace UseCases
 {
-    public class EditProductUseCase: IEditProductUseCase
+    public class ViewProductsByCategoryId: IViewProductsByCategoryId
     {
         private readonly IProductRepository productRepository;
-        public EditProductUseCase(IProductRepository productRepository)
+
+        public ViewProductsByCategoryId(IProductRepository productRepository)
         {
 
             this.productRepository = productRepository;
 
         }
-
-        public void Execute(Product product)
+        public IEnumerable<Product> Execute(int categoryId)
         {
-            productRepository.UpdateProduct(product);
+            return productRepository.GetProductsByCategoryById(categoryId);
         }
     }
 }

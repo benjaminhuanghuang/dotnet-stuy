@@ -8,7 +8,7 @@ Manage Products
 Manage Sellers
 
 - Sellers
-Selling Console
+Cashier Console
 
 
 ## Create project
@@ -87,3 +87,11 @@ EditProductComponent.razor
 ## Delete Product
 DeleteProductUseCase
 IDeleteProductUseCase
+
+
+## Cashier Console
+ViewProductsByCategoryId
+
+SelectProductForSellingComponent.razor
+
+CashierConsoleComponent.razor
