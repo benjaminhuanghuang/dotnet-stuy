@@ -3,7 +3,7 @@
 
 <div class="form-group">
     <label for="category">Category</label>
-    <select id="category" class="form-control" @bind="selectedCategoryId">
+    <select id="category" class="form-control" @bind="SelectedCategoryId">
         <option selected></option>
         @foreach (var category in categories)
         {
@@ -43,7 +43,7 @@
 
     private int _selectedCategoryId;
 
-    private int selectedCategoryId
+    private int SelectedCategoryId
     {
         get
         {
@@ -53,6 +53,7 @@
         {
             _selectedCategoryId = value;
             productsInCategory = ViewProductsByCategoryId.Execute(_selectedCategoryId);
+            OnSelectProduct(null);
             StateHasChanged();
         }
     }
@@ -69,7 +70,10 @@
 
     public void OnSelectProduct(Product product)
     {
-        selectedProductId = product.ProductId;
         OnProductSelected.InvokeAsync(product);
+        if (product != null)
+        {
+            selectedProductId = product.ProductId;
+        }
     }
 }

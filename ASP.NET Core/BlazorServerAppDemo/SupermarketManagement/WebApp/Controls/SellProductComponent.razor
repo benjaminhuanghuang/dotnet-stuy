@@ -1,23 +1,26 @@
 ﻿@inject IGetProductByIdUseCase GetProductByIdUseCase
+@inject ISellProductUseCase SellProductUseCase
+
 
 @if (productToSell != null)
 {
-    <EditForm Model="productToSell" class="form-inline" OnInvalidSubmit="SellProduct">
+    <EditForm Model="productToSell" OnValidSubmit="SellProduct">
         <DataAnnotationsValidator></DataAnnotationsValidator>
         <ValidationSummary></ValidationSummary>
 
         <div class="form-group">
             <label for="name">Product Name</label>
-            <input id="name" type="text" readonly value="@productToSell.Name" />
+            <input id="name" type="text" readonly class="form-control" value="@productToSell.Name" />
         </div>
         <div class="form-group">
             <label for="price">Price</label>
-            <input id="price" type="text" readonly value="@(string.Format("{0:c}", productToSell.Price))" />
+            <input id="price" type="text" class="form-control" readonly value="@(string.Format("{0:c}", productToSell.Price))" />
         </div>
         <div class="form-group">
             <label for="qty">Quantity</label>
-            <InputNumber id="qty" readonly @bind-Value="@productToSell.Quantity" class="form-control"></InputNumber>
+            <InputNumber id="qty" @bind-Value="@productToSell.Quantity" class="form-control"></InputNumber>
         </div>
+        <button type="submit" class="btn btn-primary">Sell</button>
     </EditForm>
     @if (!string.IsNullOrEmpty(errorMessage))
     {
@@ -48,6 +51,10 @@
                     Quantity = 0
                 };
         }
+        else
+        {
+            productToSell = null;
+        }
     }
 
     private void SellProduct()
@@ -57,10 +64,17 @@
         {
             OnProductSold.InvokeAsync(productToSell);
             errorMessage = string.Empty;
+            SellProductUseCase.Execute(productToSell.ProductId, productToSell.Quantity.Value);
+        }
+        else if (product.Quantity <= 0)
+        {
+            errorMessage = "The quantity has to be greater than 0.";
         }
         else
         {
-            errorMessage = $"(product.Name) only has (product.Quantity) left. It is not enough.";
+            errorMessage = $"{product.Name} only has {product.Quantity} left. It is not enough.";
         }
     }
+
+
 }

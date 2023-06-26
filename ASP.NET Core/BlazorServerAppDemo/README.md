@@ -95,3 +95,9 @@ ViewProductsByCategoryId
 SelectProductForSellingComponent.razor
 
 CashierConsoleComponent.razor
+
+
+## Sell Product
+
+
+## List sold items
