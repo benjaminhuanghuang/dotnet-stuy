@@ -1,8 +1,6 @@
 ﻿@inject IViewCategoriesUseCase ViewCategoriesUseCase;
 @inject IViewProductsByCategoryId ViewProductsByCategoryId;
 
-<h3>SelectProductForSellingComponent</h3>
-
 <div class="form-group">
     <label for="category">Category</label>
     <select id="category" class="form-control" @bind="selectedCategoryId">
@@ -27,11 +25,10 @@
         <tbody>
             @foreach (var product in productsInCategory)
             {
-                <tr>
+                <tr @onclick="@(()=>OnSelectProduct(product))" style="cursor:pointer">
                     <td>@product.Name</td>
                     <td>@Math.Round(product.Price.Value, 2)</td>
                     <td>@product.Quantity</td>
-
                 </tr>
             }
         </tbody>
@@ -39,6 +36,9 @@
 }
 @code {
     private IEnumerable<Product> productsInCategory;
+
+    [Parameter]
+    public EventCallback<Product> OnProductSelected { get; set; }
 
     private int _selectedCategoryId;
 
@@ -52,6 +52,7 @@
         {
             _selectedCategoryId = value;
             productsInCategory = ViewProductsByCategoryId.Execute(_selectedCategoryId);
+            StateHasChanged();
         }
     }
 
@@ -63,5 +64,10 @@
         base.OnInitialized();
 
         categories = ViewCategoriesUseCase.Execute();
+    }
+
+    public void OnSelectProduct(Product product)
+    {
+        OnProductSelected.InvokeAsync(product);
     }
 }
