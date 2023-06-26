@@ -73,3 +73,12 @@ builder.Services.AddTransient<IAddProductsUseCase, AddProductsUseCase>();
 ```
 
 AddProductComponent.razor
+
+
+## Edit Product
+EditProductUseCase
+IEditProductUseCase
+
+inject
+
+EditProductComponent.razor

@@ -1,0 +1,81 @@
+﻿
+
+@page "/editproduct/{productId}"
+
+@inject NavigationManager NavigationManager
+@inject IEditProductUseCase EditProductUseCase
+@inject IGetProductByIdUseCase GetProductByIdUseCase
+
+<h3>Edit Product</h3>
+
+@if (product != null)
+{
+    <EditForm Model="product" class="form-inline" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <InputText id="name" class="form-control" @bind-Value="product.Name" />
+        </div>
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" class="form-control" @bind="product.CategoryId">
+                <option selected></option>
+                @foreach (var category in categories)
+                {
+                    <option value="@category.CategoryId">@category.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <InputNumber id="price" class="form-control" @bind-Value="product.Price" @bind-Value:format="F2" />
+        </div>
+        <div class="form-group">
+            <label for="qty">Quantity</label>
+            <InputNumber id="qty" class="form-control" @bind-Value="product.Quantity" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-primary" onclick="OnCancel">Cancel</button>
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public string ProductId
+    {
+        get; set;
+    }
+
+    private Product product; 
+    private IEnumerable<Category> categories;
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        product = new Product();
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if (int.TryParse(ProductId, out int iProductId))
+        {
+            this.product = GetProductByIdUseCase.Execute(iProductId);
+        }
+    }
+
+    private void OnValidSubmit()
+    {
+        EditProductUseCase.Execute(this.product);
+        NavigationManager.NavigateTo("/products");
+    }
+
+    private void OnCancel()
+    {
+        NavigationManager.NavigateTo("/products");
+    }
+}

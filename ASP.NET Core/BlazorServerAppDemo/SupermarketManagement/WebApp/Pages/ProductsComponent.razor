@@ -26,10 +26,10 @@
                     <td>@product.Name</td>
                     <td>@Math.Round(product.Price.Value, 2)</td>
                     <td>@product.Quantity</td>
-                    @*<td>
-                        <button type="button" @onclick="@(()=>EditCategory(category))" class="btn  htn-link">Edit</button>
-                        <button type="button" @onclick="@(()=>DeleteCategory(category.CategoryId))" class="btn  htn-link">Delete</button>
-                    </td>*@
+                    <td>
+                        <button type="button" @onclick="@(()=>OnEditProduct(product))" class="btn  htn-link">Edit</button>
+                        <button type="button" @onclick="@(()=>DeleteProdut(product.ProductId))" class="btn htn-link">Delete</button>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -52,6 +52,17 @@
         NavigationManager.NavigateTo("/addproduct");
     }
 
+    private void OnEditProduct(Product product)
+    {
+        NavigationManager.NavigateTo($"/editProduct/{product.ProductId}");
+    }
+
+    private void DeleteProdut(int productId)
+    {
+        //DeleteCategoryUseCase.Delete(categoryId);
+        //LoadCategories();
+
+    }
     private void LoadProducts()
     {
         products = ViewProductsUseCase.Execute()?.ToList();
