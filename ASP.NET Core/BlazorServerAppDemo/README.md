@@ -54,9 +54,22 @@ add link in the Shared/NavMenu.razor
 ## GetCategoryById and EditCategory 
 
 ## Delete
-
+DeleteCategoryUseCase
 
 
 ## Products
+ViewProductsUseCase
 
 add link in the Shared/NavMenu.razor
+
+
+## Add Product
+AddProductUseCase
+IAddProductUseCase
+
+inject
+```
+builder.Services.AddTransient<IAddProductsUseCase, AddProductsUseCase>();
+```
+
+AddProductComponent.razor
