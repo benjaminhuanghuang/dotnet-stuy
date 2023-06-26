@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace UseCases.UseCaseInterfaces
 {
-    public interface IGetCategoryByIdUseCase
+    public interface IViewProductsUseCase
     {
-        public Category Execute(int categoryId);
+        public IEnumerable<Product> Execute();
     }
 }

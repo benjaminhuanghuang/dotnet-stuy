@@ -46,7 +46,7 @@ Add dependencies into _imports
 @using CoreBusiness
 ```
 ## CategoriesComponent.razor
-
+add link in the Shared/NavMenu.razor
 
 ## AddCategoryComponent.razor
 
@@ -54,3 +54,9 @@ Add dependencies into _imports
 ## GetCategoryById and EditCategory 
 
 ## Delete
+
+
+
+## Products
+
+add link in the Shared/NavMenu.razor

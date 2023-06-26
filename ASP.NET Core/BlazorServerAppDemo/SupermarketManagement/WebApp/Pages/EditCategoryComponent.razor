@@ -49,7 +49,7 @@
     {
         base.OnParametersSet();
         if (int.TryParse(CategoryId, out int iCategoryId)){
-            this.category = GetCategoryByIdUseCase.GetCategoryById(iCategoryId);
+            this.category = GetCategoryByIdUseCase.Execute(iCategoryId);
         }
     }
 

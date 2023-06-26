@@ -1,0 +1,59 @@
+﻿@page "/products"
+
+@inject NavigationManager NavigationManager;
+@inject IViewProductsUseCase ViewProductsUseCase
+@inject IGetCategoryByIdUseCase GetCategoryByIdUseCase
+
+<h3>Products</h3>
+
+@if (products != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Category</th>
+                <th>Product Name</th>
+                <th>Prict</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in products)
+            {
+                <tr>
+                    <td>@GetCategoryByIdUseCase.Execute(@product.CategoryId)?.Name</td>
+                    <td>@product.Name</td>
+                    <td>@Math.Round(product.Price)</td>
+                    <td>@product.Quantity</td>
+                    @*<td>
+                        <button type="button" @onclick="@(()=>EditCategory(category))" class="btn  htn-link">Edit</button>
+                        <button type="button" @onclick="@(()=>DeleteCategory(category.CategoryId))" class="btn  htn-link">Delete</button>
+                    </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <button class="btn btn-primary" @onclick="onClickAddActegory">Add Category</button>
+}
+
+@code {
+    private IList<Product> products;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        this.LoadProducts();
+    }
+
+    private void onClickAddActegory()
+    {
+        NavigationManager.NavigateTo("/addcategory");
+    }
+
+    private void LoadProducts()
+    {
+        products = ViewProductsUseCase.Execute()?.ToList();
+    }
+}
