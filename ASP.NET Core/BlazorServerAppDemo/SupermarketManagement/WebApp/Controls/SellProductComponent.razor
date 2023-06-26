@@ -1,25 +1,28 @@
 ﻿@inject IGetProductByIdUseCase GetProductByIdUseCase
 
-@if(SelectedProduct != null)
+@if (productToSell != null)
 {
     <EditForm Model="productToSell" class="form-inline" OnInvalidSubmit="SellProduct">
         <DataAnnotationsValidator></DataAnnotationsValidator>
         <ValidationSummary></ValidationSummary>
 
-    <div class="form-group">
-        <label for="name">Product Name</label>
+        <div class="form-group">
+            <label for="name">Product Name</label>
             <input id="name" type="text" readonly value="@productToSell.Name" />
-    </div>
-    <div class="form-group">
-        <label for="price">Price</label>
-            <input id="price" type="text" readonly value="@(string.Format("{0:c}",@productToSell.Price))" />
-    </div>
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input id="price" type="text" readonly value="@(string.Format("{0:c}", productToSell.Price))" />
+        </div>
         <div class="form-group">
             <label for="qty">Quantity</label>
-            <InputText id="qty" readonly @bind-value="@productToSell.Quantity" class="form-control" />
+            <InputNumber id="qty" readonly @bind-Value="@productToSell.Quantity" class="form-control"></InputNumber>
         </div>
     </EditForm>
-    <div class="alert alert-danger">@errorMessage</div>
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
 }
 @code {
     private Product productToSell;
@@ -31,10 +34,10 @@
     [Parameter]
     public EventCallback<Product> OnProductSold { get; set; }
 
-    override protected void OnInitialized()
+    override protected void OnParametersSet()
     {
-        base.OnInitialized();
-        if(SelectedProduct != null)
+        base.OnParametersSet();
+        if (SelectedProduct != null)
         {
             productToSell = new Product
                 {
@@ -42,7 +45,7 @@
                     Name = SelectedProduct.Name,
                     CategoryId = SelectedProduct.CategoryId,
                     Price = SelectedProduct.Price,
-                    Quantity = SelectedProduct.Quantity
+                    Quantity = 0
                 };
         }
     }
@@ -54,9 +57,10 @@
         {
             OnProductSold.InvokeAsync(productToSell);
             errorMessage = string.Empty;
-        } else
+        }
+        else
         {
-           errorMessage = $"(product.Name) only has (product.Quantity) left. It is not enough.";
+            errorMessage = $"(product.Name) only has (product.Quantity) left. It is not enough.";
         }
     }
 }
