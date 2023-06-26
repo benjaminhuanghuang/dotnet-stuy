@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.UseCaseInterfaces;
 
-namespace UseCases
+namespace UseCases.ProductsUseCases
 {
-    public class ViewProductsByCategoryId: IViewProductsByCategoryId
+    public class ViewProductsByCategoryId : IViewProductsByCategoryId
     {
         private readonly IProductRepository productRepository;
 

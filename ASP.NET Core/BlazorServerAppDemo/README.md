@@ -101,3 +101,4 @@ CashierConsoleComponent.razor
 
 
 ## List sold items
+RecordTransactionUseCase

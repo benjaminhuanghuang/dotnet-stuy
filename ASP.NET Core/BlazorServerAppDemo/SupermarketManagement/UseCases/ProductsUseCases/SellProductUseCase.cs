@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.UseCaseInterfaces;
 
-namespace UseCases
+namespace UseCases.ProductsUseCases
 {
-    public class SellProductUseCase:ISellProductUseCase
+    public class SellProductUseCase : ISellProductUseCase
     {
         private readonly IProductRepository _productRepository;
         public SellProductUseCase(IProductRepository productRepository)
         {
-            this._productRepository = productRepository;
+            _productRepository = productRepository;
         }
 
         public void Execute(int productId, int qtyToSell)
