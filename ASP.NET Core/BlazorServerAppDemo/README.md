@@ -82,3 +82,8 @@ IEditProductUseCase
 inject
 
 EditProductComponent.razor
+
+
+## Delete Product
+DeleteProductUseCase
+IDeleteProductUseCase

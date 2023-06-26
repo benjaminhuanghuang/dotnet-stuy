@@ -3,6 +3,7 @@
 @inject NavigationManager NavigationManager;
 @inject IViewProductsUseCase ViewProductsUseCase
 @inject IGetCategoryByIdUseCase GetCategoryByIdUseCase
+@inject IDeleteProductUseCase DeleteProductUseCase
 
 <h3>Products</h3>
 
@@ -28,7 +29,7 @@
                     <td>@product.Quantity</td>
                     <td>
                         <button type="button" @onclick="@(()=>OnEditProduct(product))" class="btn  htn-link">Edit</button>
-                        <button type="button" @onclick="@(()=>DeleteProdut(product.ProductId))" class="btn htn-link">Delete</button>
+                        <button type="button" @onclick="@(()=>OnDeleteProdut(product.ProductId))" class="btn htn-link">Delete</button>
                     </td>
                 </tr>
             }
@@ -57,10 +58,10 @@
         NavigationManager.NavigateTo($"/editProduct/{product.ProductId}");
     }
 
-    private void DeleteProdut(int productId)
+    private void OnDeleteProdut(int productId)
     {
-        //DeleteCategoryUseCase.Delete(categoryId);
-        //LoadCategories();
+        DeleteProductUseCase.Execute(productId);
+        LoadProducts();
 
     }
     private void LoadProducts()
