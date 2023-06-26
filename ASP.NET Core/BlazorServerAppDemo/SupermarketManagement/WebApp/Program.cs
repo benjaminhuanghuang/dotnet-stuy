@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Plugins.DataStore.InMemory;
+using UseCases;
 using UseCases.CategoriesUseCases;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.ProductsUseCases;
@@ -18,6 +19,7 @@ builder.Services.AddSingleton<WeatherForecastService>();
 // Dependency injection for In-Memory data store
 builder.Services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductInMemoryRepository>();
+builder.Services.AddTransient<ITransactionRepository, TransactionInMemoryRepository>();
 
 // Dependency injection for Use cases
 builder.Services.AddTransient<IViewCategoriesUseCase, ViewCategoriesUseCase>();
@@ -33,6 +35,9 @@ builder.Services.AddTransient<IGetProductByIdUseCase, GetProductByIdUseCase>();
 builder.Services.AddTransient<IDeleteProductUseCase, DeleteProductUseCase>();
 builder.Services.AddTransient<IViewProductsByCategoryId, ViewProductsByCategoryId>();
 builder.Services.AddTransient<ISellProductUseCase, SellProductUseCase>();
+//--Transactions
+builder.Services.AddTransient<IRecordTransactionUseCase, RecordTransactionUseCase>();
+
 
 var app = builder.Build();
 
