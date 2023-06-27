@@ -11,6 +11,7 @@ namespace CoreBusiness
         public int Transactionid { get; set; }
         public DateTime Timestamp { get; set; }
         public int Productid { get; set; }
+        public string ProductName { get; set; }  // in case product name changes
         public double Price { get; set; }
         public int BeforeQty { get; set; }
         public int SoldQty { get; set; }

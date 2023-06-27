@@ -20,7 +20,7 @@ namespace UseCases
 
         }
 
-        public IEnumerable<Transaction> Execute(string cashierName, int productId, int qty)
+        public IEnumerable<Transaction> Execute(string cashierName)
         {
             return _transactionRepository.GetByDay(cashierName, DateTime.Now);
         }
