@@ -10,7 +10,7 @@ using UseCases.UseCaseInterfaces;
 
 namespace UseCases
 {
-    public class RecordTransactionUseCase
+    public class RecordTransactionUseCase : IRecordTransactionUseCase
     {
         private readonly ITransactionRepository _transactionRepository;
         private readonly IGetProductByIdUseCase _getProductByIdUseCase;
@@ -27,7 +27,7 @@ namespace UseCases
         public void Execute(string cashierName, int productId, int qty)
         {
             var product = _getProductByIdUseCase.Execute(productId);
-            _transactionRepository.Save(cashierName, productId, product.Price.Value, qty);
+            _transactionRepository.Save(cashierName, productId, product.Price.Value, product.Quantity.Value, qty);
         }
     }
 }

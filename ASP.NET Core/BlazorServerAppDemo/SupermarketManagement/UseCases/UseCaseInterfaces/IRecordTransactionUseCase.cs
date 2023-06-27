@@ -1,4 +1,4 @@
-﻿namespace UseCases
+﻿namespace UseCases.UseCaseInterfaces
 {
     public interface IRecordTransactionUseCase
     {

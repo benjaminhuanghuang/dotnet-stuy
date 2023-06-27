@@ -35,6 +35,9 @@
     public Product SelectedProduct { get; set; }
 
     [Parameter]
+    public string CashierName { get; set; }
+
+    [Parameter]
     public EventCallback<Product> OnProductSold { get; set; }
 
     override protected void OnParametersSet()
@@ -59,12 +62,18 @@
 
     private void SellProduct()
     {
+        if (string.IsNullOrWhiteSpace(CashierName))
+        {
+            errorMessage = "The cashier's name is missing";
+            return;
+        }
+
         var product = GetProductByIdUseCase.Execute(productToSell.ProductId);
         if (product.Quantity >= productToSell.Quantity)
         {
             OnProductSold.InvokeAsync(productToSell);
             errorMessage = string.Empty;
-            SellProductUseCase.Execute(productToSell.ProductId, productToSell.Quantity.Value);
+            SellProductUseCase.Execute(CashierName, productToSell.ProductId, productToSell.Quantity.Value);
         }
         else if (product.Quantity <= 0)
         {

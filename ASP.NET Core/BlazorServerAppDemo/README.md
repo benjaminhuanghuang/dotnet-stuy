@@ -104,3 +104,5 @@ CashierConsoleComponent.razor
 Transaction
 
 RecordTransactionUseCase
+
+IGetTodayTransactionsUseCase, GetTodayTransactionsUseCase

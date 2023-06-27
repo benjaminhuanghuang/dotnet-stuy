@@ -12,7 +12,8 @@ namespace CoreBusiness
         public DateTime Timestamp { get; set; }
         public int Productid { get; set; }
         public double Price { get; set; }
-        public int Qty { get; set; }
+        public int BeforeQty { get; set; }
+        public int SoldQty { get; set; }
         public string CashierName { get; set; }
     }
 }

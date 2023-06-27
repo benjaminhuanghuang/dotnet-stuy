@@ -1,16 +1,27 @@
 ﻿@page "/cashier_console"
 <h3>Cashier's Console</h3>
+<div class="form-group">
+<label for="cashierName">Cashier's Name</label>
+    <input type="text" id="cashierName" class="form-control" @bind-value="@cashierName" />
+</div>
 <br />
 <div class="row">
     <div class="col-4">
         <SelectProductForSellingComponent OnProductSelected="SelectProduct"></SelectProductForSellingComponent>
-        <SellProductComponent SelectedProduct="selectedProduct" OnProductSold="SellProduct"></SellProductComponent>
+        <SellProductComponent SelectedProduct="selectedProduct" OnProductSold="SellProduct" CashierName="@cashierName"></SellProductComponent>
     </div>
     <div class="col">
     </div>
 </div>
 @code {
     private Product selectedProduct;
+    private string cashierName;
+
+    override protected void OnInitialized()
+    {
+        base.OnInitialized();
+        cashierName = "Cashier";
+    }
 
     private void SelectProduct(Product product)
     {

@@ -16,12 +16,32 @@ namespace Plugins.DataStore.InMemory
             _transactions = new List<Transaction>();
         }
 
-        public IEnumerable<Transaction> GetByDay(DateTime date)
+        public IEnumerable<Transaction> Get(string cashierName)
         {
-            throw new NotImplementedException();
+            if(string.IsNullOrWhiteSpace(cashierName))
+            {
+                return _transactions;
+            }else
+            {
+                return _transactions.Where(t =>string.Equals(t.CashierName , cashierName, StringComparison.OrdinalIgnoreCase));
+            }
+            
         }
 
-        public void Save(string casherName, int productId, double price, int qty)
+        public IEnumerable<Transaction> GetByDay(string cashierName, DateTime date)
+        {
+            if (string.IsNullOrWhiteSpace(cashierName))
+            {
+                return _transactions.Where(t => t.Timestamp.Date == date.Date);
+            }
+            else
+            {
+                return _transactions.Where(t => string.Equals(t.CashierName, cashierName, StringComparison.OrdinalIgnoreCase) && t.Timestamp.Date == date.Date);
+            }
+           
+        }
+
+        public void Save(string casherName, int productId, double price, int beforeQty, int soldQty)
         {
             int transactionId = 0;
             if (_transactions != null && _transactions.Count > 0)
@@ -40,7 +60,8 @@ namespace Plugins.DataStore.InMemory
                     Productid = productId,
                     Timestamp = DateTime.Now,
                     Price = price,
-                    Qty = qty,
+                    BeforeQty = beforeQty,
+                    SoldQty = soldQty,
                 });
         }
     }
