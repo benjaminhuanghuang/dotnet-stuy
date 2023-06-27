@@ -31,7 +31,6 @@
     override protected void OnInitialized()
     {
         base.OnInitialized();
-        cashierName = "Cashier";
     }
 
     private void SelectProduct(Product product)
@@ -40,6 +39,6 @@
     }
     private void SellProduct(Product product)
     {
-        todayTransactionsComponent.LoadTransactions(cashierName);
+         todayTransactionsComponent.LoadTransactions(cashierName);
     }
 }

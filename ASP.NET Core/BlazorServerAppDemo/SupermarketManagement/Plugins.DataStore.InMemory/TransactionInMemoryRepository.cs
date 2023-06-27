@@ -56,6 +56,7 @@ namespace Plugins.DataStore.InMemory
             this._transactions.Add(
                 new Transaction
                 {
+                    CashierName = casherName,
                     Transactionid = transactionId,
                     Productid = productId,
                     ProductName = productName,
