@@ -65,6 +65,6 @@ namespace Plugins.DataStore.InMemory
                     BeforeQty = beforeQty,
                     SoldQty = soldQty,
                 });
-        }
+            }
     }
 }

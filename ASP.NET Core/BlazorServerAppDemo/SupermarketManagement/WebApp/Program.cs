@@ -19,7 +19,7 @@ builder.Services.AddSingleton<WeatherForecastService>();
 // Dependency injection for In-Memory data store
 builder.Services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductInMemoryRepository>();
-builder.Services.AddTransient<ITransactionRepository, TransactionInMemoryRepository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionInMemoryRepository>();
 
 // Dependency injection for Use cases
 builder.Services.AddTransient<IViewCategoriesUseCase, ViewCategoriesUseCase>();

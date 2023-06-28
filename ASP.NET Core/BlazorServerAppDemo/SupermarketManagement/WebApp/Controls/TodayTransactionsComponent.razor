@@ -1,5 +1,4 @@
 ﻿@inject IGetTodayTransactionsUseCase GetTodayTransactionsUseCase;
-<h1>test</h1>
 @if (transactions != null)
 {
     <table class="table">
@@ -15,7 +14,8 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(var trans in transactions){
+            @foreach (var trans in transactions)
+            {
                 <tr>
                     <td>@trans.CashierName</td>
                     <td>@trans.ProductName</td>
@@ -31,10 +31,15 @@
 
 @code {
     private IEnumerable<Transaction> transactions;
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
 
     public void LoadTransactions(string cashierName)
     {
         transactions = GetTodayTransactionsUseCase.Execute(cashierName);
+        StateHasChanged(); // important
     }
 
 }

@@ -69,21 +69,19 @@
         }
 
         var product = GetProductByIdUseCase.Execute(productToSell.ProductId);
-        if (product.Quantity >= productToSell.Quantity)
+        if (productToSell.Quantity <= 0)
+        {
+            errorMessage = "The quantity has to be greater than 0.";
+        }
+        else if (product.Quantity >= productToSell.Quantity)
         {
             OnProductSold.InvokeAsync(productToSell);
             errorMessage = string.Empty;
             SellProductUseCase.Execute(CashierName, productToSell.ProductId, productToSell.Quantity.Value);
-        }
-        else if (product.Quantity <= 0)
-        {
-            errorMessage = "The quantity has to be greater than 0.";
-        }
+        }    
         else
         {
             errorMessage = $"{product.Name} only has {product.Quantity} left. It is not enough.";
         }
     }
-
-
 }
