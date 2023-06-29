@@ -106,3 +106,8 @@ Transaction
 RecordTransactionUseCase
 
 IGetTodayTransactionsUseCase, GetTodayTransactionsUseCase
+
+
+
+## Transaction report
+GetTransactionUseCase

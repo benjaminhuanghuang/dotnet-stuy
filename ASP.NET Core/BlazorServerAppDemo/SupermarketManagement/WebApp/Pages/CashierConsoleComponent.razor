@@ -33,12 +33,21 @@
         base.OnInitialized();
     }
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        if (firstRender)
+        {
+            todayTransactionsComponent.LoadTransactions(cashierName);
+        }
+    }
+
     private void SelectProduct(Product product)
     {
         selectedProduct = product;
     }
     private void SellProduct(Product product)
     {
-         todayTransactionsComponent.LoadTransactions(cashierName);
+        todayTransactionsComponent.LoadTransactions(cashierName);
     }
 }
