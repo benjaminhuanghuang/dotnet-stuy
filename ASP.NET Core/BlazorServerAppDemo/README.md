@@ -111,3 +111,10 @@ IGetTodayTransactionsUseCase, GetTodayTransactionsUseCase
 
 ## Transaction report
 GetTransactionUseCase
+
+TransactionReportComponent.razor
+
+Nav link
+
+
+## Printing
