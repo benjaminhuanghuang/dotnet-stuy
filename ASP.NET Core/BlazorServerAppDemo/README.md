@@ -118,3 +118,55 @@ Nav link
 
 
 ## Printing
+```
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #printarea, #printarea * {
+        visibility: visible;
+    }
+
+    #printarea {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
+```
+
+## SQL & Entity Framework
+Create new project Plugins.DataStore.SQL
+
+Add dependencies
+```
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.SqlServer   // for WebApp and Plugins.DataStore.SQL
+Microsoft.EntityFrameworkCore.To      ol  s   // for WebApp and Plugins.DataStore.SQL
+
+```
+
+Add MarketContext
+
+
+
+Open Server Explorer, add data connection, copy the connection string to appsettings.json
+
+```
+builder.Services.AddDbContext<MarketContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+```
+
+Add migration:
+Tools -> NuGet Package Manager -> Package Manager Console
+Default project: Plugins.DataStore.SQL
+```
+Add-Migration Init
+Update-Database
+```
+
+
+```
+```
+```

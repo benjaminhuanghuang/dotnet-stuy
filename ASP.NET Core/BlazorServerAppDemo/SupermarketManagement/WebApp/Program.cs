@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.EntityFrameworkCore;
 using Plugins.DataStore.InMemory;
+using Plugins.DataStore.SQL;
 using UseCases;
 using UseCases.CategoriesUseCases;
 using UseCases.DataStorePluginInterfaces;
@@ -15,6 +17,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
+
+builder.Services.AddDbContext<MarketContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Dependency injection for In-Memory data store
 builder.Services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
