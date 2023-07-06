@@ -9,6 +9,7 @@ using UseCases.DataStorePluginInterfaces;
 using UseCases.ProductsUseCases;
 using UseCases.UseCaseInterfaces;
 using WebApp.Data;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,10 +22,17 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddDbContext<MarketContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AccountContext>();
+
 // Dependency injection for In-Memory data store
-builder.Services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
-builder.Services.AddScoped<IProductRepository, ProductInMemoryRepository>();
-builder.Services.AddScoped<ITransactionRepository, TransactionInMemoryRepository>();
+//builder.Services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
+//builder.Services.AddScoped<IProductRepository, ProductInMemoryRepository>();
+//builder.Services.AddScoped<ITransactionRepository, TransactionInMemoryRepository>();
+
+// Dependency injection for EF core data store  
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 
 // Dependency injection for Use cases
 builder.Services.AddTransient<IViewCategoriesUseCase, ViewCategoriesUseCase>();

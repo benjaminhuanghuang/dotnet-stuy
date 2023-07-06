@@ -166,7 +166,9 @@ Add-Migration Init
 Update-Database
 ```
 
+## Identity & Auth
+Project -> Add new scaffolded -> Identity -> Account/Login, Account/Logout, Account/Register
 
-```
-```
-```
+Add-Migration CreateIdentitySchema -Context AccountContext
+
+Update-Database -Context AccountContext

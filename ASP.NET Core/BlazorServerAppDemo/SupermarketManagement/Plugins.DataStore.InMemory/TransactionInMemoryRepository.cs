@@ -33,11 +33,11 @@ namespace Plugins.DataStore.InMemory
         {
             if (string.IsNullOrWhiteSpace(cashierName))
             {
-                return _transactions.Where(t => t.Timestamp.Date == date.Date);
+                return _transactions.Where(t => t.TimeStamp.Date == date.Date);
             }
             else
             {
-                return _transactions.Where(t => string.Equals(t.CashierName, cashierName, StringComparison.OrdinalIgnoreCase) && t.Timestamp.Date == date.Date);
+                return _transactions.Where(t => string.Equals(t.CashierName, cashierName, StringComparison.OrdinalIgnoreCase) && t.TimeStamp.Date == date.Date);
             }
 
         }
@@ -59,9 +59,9 @@ namespace Plugins.DataStore.InMemory
                 {
                     CashierName = casherName,
                     Transactionid = transactionId,
-                    Productid = productId,
+                    ProductId = productId,
                     ProductName = productName,
-                    Timestamp = DateTime.Now,
+                    TimeStamp = DateTime.Now,
                     Price = price,
                     BeforeQty = beforeQty,
                     SoldQty = soldQty,
@@ -71,11 +71,11 @@ namespace Plugins.DataStore.InMemory
         public IEnumerable<Transaction> Search(string cashierName, DateTime startDate, DateTime endDate)
         {
             if (string.IsNullOrWhiteSpace(cashierName))
-                return _transactions.Where(x => x.Timestamp >= startDate.Date && x.Timestamp <= endDate.Date.AddDays(1).Date);
+                return _transactions.Where(x => x.TimeStamp >= startDate.Date && x.TimeStamp <= endDate.Date.AddDays(1).Date);
             else
                 return _transactions.Where(x =>
                     string.Equals(x.CashierName, cashierName, StringComparison.OrdinalIgnoreCase) &&
-                    x.Timestamp >= startDate.Date && x.Timestamp <= endDate.Date.AddDays(1).Date);
+                    x.TimeStamp >= startDate.Date && x.TimeStamp <= endDate.Date.AddDays(1).Date);
 
         }
     }
