@@ -16,6 +16,7 @@ https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history
 | 7.2  |                                            |               |                | 2017.11      |
 | 7.3  |                                            |               |                | 2018.5       |
 | 8.0  | Static local, Async Steam, Nullable ref    | .NET Core 3.0 |                | 2019.9       |
-| 9.0  | Static local, Async Steam, Nullable ref    | .NET 5        |                | 2020.11      |
+| 9.0  |                                            | .NET 5        |                | 2020.11      |
 | 10   | top-level statements, Record structs       | .NET 6        |                | 2021.11      |
 | 11   | Raw/UTF-8 string literals                  | .NET 7        |                | 2022.11      |
+| 12   | Primary constructors                       | .NET 8        |                | 2023         |
