@@ -1,3 +1,6 @@
+using SuperHeroAPI.Data;
+using SuperHeroAPI.Services.SuperHeroService;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//
+builder.Services.AddSingleton<ISuperHeroService, SuperHeroService>();
+builder.Services.AddDbContext<HeroDataContext>();
 
 var app = builder.Build();
 

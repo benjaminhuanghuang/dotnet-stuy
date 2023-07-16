@@ -9,3 +9,15 @@ appsettings.json
   }
 ```
 
+
+
+## Use OnConfiguring in the DbContext class
+```
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+{
+    base.OnConfiguring(optionsBuilder);
+
+    optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=SuperHeroDB;Trusted_Connection=True;TrustServerCertificate=True");
+}
+
+```
