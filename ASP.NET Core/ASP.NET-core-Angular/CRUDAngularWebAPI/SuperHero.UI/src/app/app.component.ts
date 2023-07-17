@@ -10,10 +10,8 @@ import { SuperHeroService } from './services/super-hero.service';
 export class AppComponent {
   title = 'SuperHero.UI';
   heroes: SuperHero[] = [];
+  heroToEdit?: SuperHero;
 
-  /**
-   *
-   */
   constructor(private superHeroService: SuperHeroService) {
 
   }
@@ -22,5 +20,16 @@ export class AppComponent {
     this.superHeroService.getSuperHeroes().subscribe((data: SuperHero[]) => {
       this.heroes = data;
     });
+  }
+  updateHeroList(heroes: SuperHero[]) {
+    this.heroes = heroes;
+  }
+
+  initNewHero() {
+    this.heroToEdit = new SuperHero();
+  }
+
+  editHero(hero: SuperHero) {
+    this.heroToEdit = hero;
   }
 }
