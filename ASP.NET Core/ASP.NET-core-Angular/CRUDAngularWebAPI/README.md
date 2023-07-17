@@ -29,3 +29,34 @@ export const environment = {
 
 ## Server
 Create project ASP.NET Core Web API
+
+
+
+
+## EF
+install
+```
+Microsoft.EntityFrameworkCore.SqlServer
+Microsoft.EntityFrameworkCore.Design
+
+```
+
+
+Add DataContext
+
+
+
+Add ConnectionString to appsettings.json
+```
+ "ConnectionStrings": {
+    "DefaultConnection": "Server=.\\SQLEXPRESS;Database=SuperHeroDB;Trusted_Connection=True;TrustServerCertificate=True"
+  }
+```
+
+Using connection string in Startup.cs
+```
+builder.Services.AddDbContext<DataContext>(option =>
+{
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+```

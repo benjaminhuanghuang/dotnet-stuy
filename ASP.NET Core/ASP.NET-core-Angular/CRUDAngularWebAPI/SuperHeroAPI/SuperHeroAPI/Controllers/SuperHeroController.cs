@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using SuperHeroAPI.Models;
+using SuperHeroAPI.Services;
 
 namespace SuperHeroAPI.Controllers
 {
@@ -9,13 +10,18 @@ namespace SuperHeroAPI.Controllers
 
     public class SuperHeroController : ControllerBase
     {
-        [HttpGet]
-        public async Task<ActionResult<List<SuperHero>>> GetAllHeros()
+        private readonly ISuperHeroService _superHeroService;
+        public SuperHeroController(ISuperHeroService superHeroService)
         {
-            return new List<SuperHero>
-           {
-               new SuperHero {Id = 1, Name = "Batman", FirstName = "Bruce", LastName = "Wayddddne", Place = "Gotham City"},
-           };
+            this._superHeroService = superHeroService;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<SuperHero>>> GetAllHeroes()
+        {
+            var result = await this._superHeroService.GetAllHeroes();
+
+            return Ok(result);
         }
 
     }
