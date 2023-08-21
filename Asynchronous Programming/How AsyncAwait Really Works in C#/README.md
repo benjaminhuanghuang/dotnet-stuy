@@ -1,7 +1,10 @@
 # How Async/Await Really Works in C#
+March 16th, 2023
+
 https://devblogs.microsoft.com/dotnet/how-async-await-really-works/
 
-synchronous method: caller will not be able to do anything else until this whole operation completes and control is returned back to the caller:
+## Synchronous vs. async-await function
+synchronous method: caller will not be able to do anything else `until` this whole operation completes and control is returned back to the caller:
 ```
 // Synchronously copy all data from source to destination.
 public void CopyStreamToStream(Stream source, Stream destination)
