@@ -9,3 +9,13 @@ What is .NET nanoFramework?
 • Supports some modern C# features
 • Specialized CLR implementations for MCUs
 • Additional targets added routinely
+
+
+.NET IOT Resources
+https://dotnet.microsoft.com/apps/iot
+
+.NET nanoFramework
+https://www.nanoframework.net
+
+Sample Project
+https://github.com/burkenyo/Burkenyo.lot
