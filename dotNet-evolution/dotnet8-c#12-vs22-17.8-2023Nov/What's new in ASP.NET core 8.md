@@ -33,3 +33,12 @@ Minimal & Web APIs：RESTful web services and APIs
 
 ## Upgrade Existing Projects
 Project -> properties
+
+
+## Updates to ASP.NET Core Platform
+Ahead-of-time Compilation (AOT)
+A publishing process that compiles NET apps to machine code "ahead of
+time". eliminating NET runtime and just-in-time (JIT) compiler dependencies.
+
+
+## Exploring New Blazor and Ul Features
