@@ -63,7 +63,7 @@ app.Run();
 Views/Shared/_Layout.cshtml
 ```html
   <div class="pb-3">
-     @RenderSection("title", false)   // required = false
+     @RenderSection("title", false)   // Section required = false
  </div>
  <div class="pb-3">
      @RenderBody()
