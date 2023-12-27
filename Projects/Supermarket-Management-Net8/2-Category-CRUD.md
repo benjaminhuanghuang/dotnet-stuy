@@ -41,7 +41,7 @@ Error message in view
 ```
 
 
-## Use js
+## Render Javascript in a Section
 ```html
 @await RenderSectionAsync("Scripts", required: false)
 
@@ -49,3 +49,10 @@ Error message in view
 
 
 ## Partial view
+```html
+
+@{
+    string action =ViewBag.Action ?? string.Empty;
+
+}
+```
