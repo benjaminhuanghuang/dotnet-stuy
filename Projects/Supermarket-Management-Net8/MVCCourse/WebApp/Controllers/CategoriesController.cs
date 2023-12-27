@@ -14,10 +14,7 @@ namespace WebApp.Controllers
 
         public IActionResult Edit(int? id)
         {
-            var category = new Category
-            {
-                CategoryId = id.HasValue ? id.Value : 0,
-            };
+            var category  = CategoriesRepository.GetCategoryById(id ?? 0);
 
             return View(category);
         }
