@@ -23,4 +23,19 @@
 _ViewStart
 
 
-## 
+## Validation
+Model
+```cs
+
+```
+
+Controller
+```cs
+```
+
+Error message in view
+```html
+<div class="col">
+    <span class="text-danger" asp-validation-for="Name"></span>
+</div>
+```
