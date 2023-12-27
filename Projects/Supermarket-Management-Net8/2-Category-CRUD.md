@@ -39,3 +39,13 @@ Error message in view
     <span class="text-danger" asp-validation-for="Name"></span>
 </div>
 ```
+
+
+## Use js
+```html
+@await RenderSectionAsync("Scripts", required: false)
+
+```
+
+
+## Partial view
