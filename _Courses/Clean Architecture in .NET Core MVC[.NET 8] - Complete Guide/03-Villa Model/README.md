@@ -13,9 +13,7 @@ inject dbcontext in controller
  ```
 
 
-Add VillaView
-
-
+## Add VillaView
 
 Add link in the Views\Shared\_Layout.cshtml
 ```html
