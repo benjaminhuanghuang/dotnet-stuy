@@ -1,4 +1,6 @@
 # Full Course - Learn ASP.NET Core MVC in .NET 8 | CRUD Operations | EntityFramework Core
+Master .NET Core MVC: Build Market Management System .NET 8
+
 https://www.youtube.com/watch?v=BzlPrVB_DwA
 
 https://www.udemy.com/course/master-net-core-mvc/?couponCode=DEC_23

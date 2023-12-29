@@ -5,7 +5,7 @@ Get connection str
 appsettings.json
 
   "ConnectionStrings": {
-    "DefautConnection": "Data Source=BENTKPAD\\SQLEXPRESS;Initial Catalog=MoviesApp-Db;Integrated Security=True;Pooling=False"
+    "DefaultConnection": "Server=.\\SQLEXPRESS; Database=WhiteLagoon;Trusted_Connection=True;TrustServerCertificate=True;Integrated Security=True"
   }
 ```
 
