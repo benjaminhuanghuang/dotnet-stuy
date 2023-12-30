@@ -1,3 +1,9 @@
+
+
+```html
+ <form method="post" class="row" enctype="multipart/form-data">
+```
+
 ## Add form field
 
 

@@ -19,7 +19,7 @@ namespace WhiteLagoon.Web.Controllers
 
         public IActionResult Index()
         {
-            var villas =_unitOfWork.Villa.GetAll();
+            var villas = _unitOfWork.Villa.GetAll();
 
             return View(villas);
         }
@@ -32,24 +32,24 @@ namespace WhiteLagoon.Web.Controllers
         [HttpPost]
         public IActionResult Create(Villa obj)
         {
-            if(obj.Name == obj.Description)
+            if (obj.Name == obj.Description)
             {
                 ModelState.AddModelError("name", "The provided description should be different from the name.");
             }
 
             if (ModelState.IsValid)
             {
-                if(obj.Image != null)
+                if (obj.Image != null)
                 {
-                    string fileName = Guid.NewGuid().ToString()+ Path.GetExtension(obj.Image.FileName);
-                    string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, @"images\Villa");
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(obj.Image.FileName);
+                    string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, @"images\VillaImage");
 
                     using (var fileStream = new FileStream(Path.Combine(imagePath, fileName), FileMode.Create))
                     {
                         obj.Image.CopyTo(fileStream);
                     }
 
-                    obj.ImageUrl = @"\images\Villa\" + fileName;
+                    obj.ImageUrl = @"\images\VillaImage\" + fileName;
                 }
                 else
                 {
@@ -64,30 +64,51 @@ namespace WhiteLagoon.Web.Controllers
         }
 
 
-        public IActionResult Update( int villaId)
+        public IActionResult Update(int villaId)
         {
-            var villa = _unitOfWork.Villa.Get(u=>u.Id == villaId);
-            if (villa == null) {
+            var villa = _unitOfWork.Villa.Get(u => u.Id == villaId);
+            if (villa == null)
+            {
                 return RedirectToAction("Error", "Home");
             }
             return View(villa);
         }
 
         [HttpPost]
-        public IActionResult Update(Villa villa)
+        public IActionResult Update(Villa obj)
         {
-            if (villa.Name == villa.Description)
+            if (obj.Name == obj.Description)
             {
                 ModelState.AddModelError("name", "The provided description should be different from the name.");
             }
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && obj.Id > 0)
             {
-                _unitOfWork.Villa.Update(villa);
+                if (obj.Image != null)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(obj.Image.FileName);
+                    string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, @"images\VillaImage");
+                    if (!string.IsNullOrEmpty(obj.ImageUrl))
+                    {
+                        var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, obj.ImageUrl.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+                    using (var fileStream = new FileStream(Path.Combine(imagePath, fileName), FileMode.Create))
+                    {
+                        obj.Image.CopyTo(fileStream);
+                    }
+
+                    obj.ImageUrl = @"\images\VillaImage\" + fileName;
+                }
+
+                _unitOfWork.Villa.Update(obj);
                 _unitOfWork.Villa.Save();
                 return RedirectToAction("Index");
             }
-            return View(villa);
+            return View(obj);
         }
         public IActionResult Delete(int villaId)
         {
@@ -100,12 +121,21 @@ namespace WhiteLagoon.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(Villa villa)
+        public IActionResult Delete(Villa obj)
         {
-            Villa? objFromDb = _unitOfWork.Villa.Get(u => u.Id == villa.Id);
+            Villa? objFromDb = _unitOfWork.Villa.Get(u => u.Id == obj.Id);
 
             if (objFromDb is not null)
             {
+                if (!string.IsNullOrEmpty(objFromDb.ImageUrl))
+                {
+                    var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, objFromDb.ImageUrl.TrimStart('\\'));
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+
                 _unitOfWork.Villa.Remove(objFromDb);
                 _unitOfWork.Villa.Save();
                 TempData["success"] = "The villa was deleted successfully.";
