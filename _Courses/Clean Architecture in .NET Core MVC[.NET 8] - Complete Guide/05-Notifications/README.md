@@ -45,3 +45,9 @@ Scoped css is bundled into App.Web.styles.css
 ```
 <link rel="stylesheet" href="~/WhiteLagoon.Web.styles.css" asp-append-version="true" />
 ``` 
+
+## Global using statement
+Views/_ViewImports.cshtml
+```html
+@using WhiteLagoon.Domain.Entities
+```
