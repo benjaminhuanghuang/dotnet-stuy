@@ -12,3 +12,13 @@ update-database
 
 Perform CRUD Operations on Amenity
     There should be dropdown for Villa
+
+
+## Amenity controller
+
+
+## Amenity List
+
+
+
+## Amenity CRUD
