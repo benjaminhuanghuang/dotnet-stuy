@@ -48,7 +48,7 @@ namespace WhiteLagoon.Web.Controllers
             if (ModelState.IsValid)
             {
                 _unitOfWork.Amenity.Add(obj.Amenity);
-                _unitOfWork.Villa.Save();
+                _unitOfWork.Save();
                 TempData["success"] = "The amenity was created successfully.";
                 return RedirectToAction(nameof(Index));
             }
@@ -85,8 +85,8 @@ namespace WhiteLagoon.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Amenity.Add(obj.Amenity);
-                _unitOfWork.Villa.Save();
+                _unitOfWork.Amenity.Update(obj.Amenity);
+                _unitOfWork.Save();
                 TempData["success"] = "The amenity was created successfully.";
                 return RedirectToAction(nameof(Index));
             }

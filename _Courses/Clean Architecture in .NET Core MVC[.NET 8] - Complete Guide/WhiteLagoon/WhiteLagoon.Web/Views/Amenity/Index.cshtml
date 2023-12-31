@@ -11,7 +11,7 @@
     <div class="card-body border p-4">
         <div class="row pb-3">
             <div class="col-6 offset-6 text-end">
-                <a class="btn btn-secondary" asp-controller="Amentiy" asp-action="Create">
+                <a class="btn btn-secondary" asp-controller="Amenity" asp-action="Create">
                     <i class="bi bi-plus-circle"></i>Create New Amenity
                 </a>
             </div>
@@ -36,12 +36,12 @@
                         <td>@obj.Villa.Name</td>
                         <td>
                             <div class="y-75 btn-group" role="group">
-                                <a asp-controfler="Amenity" asp-action="Update" asp-route-villaNumberId="@obj.Id"
+                                <a asp-controfler="Amenity" asp-action="Update" asp-route-amenityId="@obj.Id"
                                    class="btn btn-success mx-2">
                                     <i class="bi bi-pencil-square"></i>
                                     Edit
                                 </a>
-                                <a asp-controfler="Amenity" asp-action="Delete" asp-route-villaNumberId="@obj.Id"
+                                <a asp-controfler="Amenity" asp-action="Delete" asp-route-amenityId="@obj.Id"
                                    class="btn btn-danger mx-2">
                                     <i class="bi bi-trash-fill"></i>
                                     Delete
