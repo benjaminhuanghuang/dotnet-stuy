@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WhiteLagoon.Application.Common.Interfaces;
+using WhiteLagoon.Application.Common.Utility;
 using WhiteLagoon.Domain.Entities;
 using WhiteLagoon.Web.ViewModels;
 
@@ -51,10 +52,10 @@ namespace WhiteLagoon.Web.Controllers
         public IActionResult Register(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-            if (!_roleManager.RoleExistsAsync("Admin").GetAwaiter().GetResult())
+            if (!_roleManager.RoleExistsAsync(SD.Role_Admin).GetAwaiter().GetResult())
             {
-                _roleManager.CreateAsync(new IdentityRole("Admin")).Wait();
-                _roleManager.CreateAsync(new IdentityRole("Customer")).Wait();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).Wait();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Customer)).Wait();
             }
 
             RegisterVM registerVM = new()
@@ -64,7 +65,7 @@ namespace WhiteLagoon.Web.Controllers
                     Text = x.Name,
                     Value = x.Name
                 }),
-                RedirectUrl = returnUrl
+                RedirectUrl = returnUrl   // if user is not logged in, redirect to login page
             };
 
             return View(registerVM);
@@ -85,7 +86,7 @@ namespace WhiteLagoon.Web.Controllers
                     UserName = registerVM.Email,
                     CreatedAt = DateTime.Now
                 };
-
+                // create user in datbase
                 var result = await _userManager.CreateAsync(user, registerVM.Password);
 
                 if (result.Succeeded)
@@ -96,7 +97,8 @@ namespace WhiteLagoon.Web.Controllers
                     }
                     else
                     {
-                        await _userManager.AddToRoleAsync(user,"Customer");
+                        // Give user default role of Customer
+                        await _userManager.AddToRoleAsync(user, SD.Role_Customer);
                     }
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
@@ -136,7 +138,7 @@ namespace WhiteLagoon.Web.Controllers
                 if (result.Succeeded)
                 {
                     var user = await _userManager.FindByEmailAsync(loginVM.Email);
-                    if (await _userManager.IsInRoleAsync(user, "Admin"))
+                    if (await _userManager.IsInRoleAsync(user, SD.Role_Admin))
                     {
                         return RedirectToAction("Index", "Dashboard");
                     }

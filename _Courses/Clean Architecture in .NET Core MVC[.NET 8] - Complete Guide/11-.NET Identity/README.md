@@ -29,7 +29,7 @@ update-database
 
 
 
-## Role 
+## Role & register
 ```cs
 // create roles in DB
  if (!_roleManager.RoleExistsAsync("Admin").GetAwaiter().GetResult())
@@ -37,4 +37,38 @@ update-database
      _roleManager.CreateAsync(new IdentityRole("Admin")).Wait();
      _roleManager.CreateAsync(new IdentityRole("Customer")).Wait();
  }
+```
+
+
+## Authorization with Roles
+```
+    [Authorize(Roles = SD.Role_Admin)]  // access denied if not admin
+
+
+    [Authorize]
+```
+
+Config the controllers of auth
+```
+builder.Services.ConfigureApplicationCookie(option =>
+    {
+    option AccessDeniedPath = "/Account/AccessDenied";
+    option. LoginPath = "/Account/Login";
+    });
+```
+
+Config the Identity in Startup.cs
+```
+builder.Services.Configure<IdentityOptions>(option =>
+    option.Password.RequiredLength = 6;
+    pption. Password. RequireDigit = false;
+    });
+```
+
+## The return URL
+Login.cshtml
+```
+    <input asp-for="RedirectUrl" hidden />
+
+    <a asp-action="Register" asp-route-returnUrl="@Model.RedirectUrl">Register as a new user</a>
 ```

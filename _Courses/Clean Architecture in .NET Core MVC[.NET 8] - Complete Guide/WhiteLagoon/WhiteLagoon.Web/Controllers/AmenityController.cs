@@ -6,9 +6,12 @@ using static System.Net.Mime.MediaTypeNames;
 using WhiteLagoon.Infrastructure.Repository;
 using WhiteLagoon.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
+using WhiteLagoon.Application.Common.Utility;
 
 namespace WhiteLagoon.Web.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin)]
     public class AmenityController : Controller
     {
         //private readonly ApplicationDbContext _db;
