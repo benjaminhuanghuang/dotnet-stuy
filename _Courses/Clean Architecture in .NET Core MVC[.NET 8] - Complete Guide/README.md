@@ -25,7 +25,7 @@ https://www.bilibili.com/video/BV1pN4y127bv/
 - Villa Availability
 - Booking
 - Manage Bookings
-- Role based Ul
+- Role based UI
 - Charts
 - Exports
 - Dashboard Service and Dbinitializer

@@ -26,3 +26,15 @@ update-database
 
 
 ## Login
+
+
+
+## Role 
+```cs
+// create roles in DB
+ if (!_roleManager.RoleExistsAsync("Admin").GetAwaiter().GetResult())
+ {
+     _roleManager.CreateAsync(new IdentityRole("Admin")).Wait();
+     _roleManager.CreateAsync(new IdentityRole("Customer")).Wait();
+ }
+```
