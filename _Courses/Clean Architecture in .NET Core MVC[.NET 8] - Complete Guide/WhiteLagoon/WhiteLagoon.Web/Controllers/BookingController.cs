@@ -20,13 +20,14 @@ namespace WhiteLagoon.Web.Controllers
         }
 
         [Authorize]
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         public IActionResult FinalizeBooking(int villaId, DateOnly checkInDate, int nights)
         {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            ApplicationUser user = _unitOfWork.User.Get(u => u.Id == userId);
+
+            // Access user profile when booking
             Booking booking = new()
             {
                 VillaId = villaId,
@@ -34,9 +35,32 @@ namespace WhiteLagoon.Web.Controllers
                 CheckInDate = checkInDate,
                 Nights = nights,
                 CheckOutDate = checkInDate.AddDays(nights),
+                UserId = userId,
+                Phone = user.PhoneNumber,
+                Email = user.Email,
+                Name = user.Name,
             };
+            booking.TotalCost = booking.Villa.Price * nights;
             return View(booking);
         }
-       
-    }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult FinalizeBooking(Booking booking)
+        {
+            var villa = _unitOfWork.Villa.Get(u => u.Id == booking.VillaId);
+            booking.TotalCost = booking.Villa.Price * booking.Nights;
+            booking.Status = SD.StatusPending;
+            booking.BookingDate = DateTime.Now;
+            _unitOfWork.Booking.Add(booking);
+            _unitOfWork.Save();
+
+            return RedirectToAction("BookingConfirmation", new { bookingId = booking.Id });
+        }
+
+        [Authorize]
+        public IActionResult BookingConfirmation(int bookingId)
+        {
+            return View(bookingId);
+        }
 }

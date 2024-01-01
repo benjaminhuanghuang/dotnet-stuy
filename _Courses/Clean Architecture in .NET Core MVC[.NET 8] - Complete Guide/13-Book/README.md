@@ -20,3 +20,20 @@ update-database
 ```
 
 ## Add Booking controller
+
+
+
+## Reuse VillaDetail partial view
+```
+   <partial name="_VillaDetail" model="@Model.Villa" />
+```       
+
+
+## Application User
+Use user information when booking
+```cs
+    var claimsIdentity = (ClaimsIdentity)User.Identity;
+    var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+    ApplicationUser user = _unitOfWork.User.GetFirstOrDefault(u => u.Id == userId);
+```
