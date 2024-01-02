@@ -37,3 +37,16 @@ Use user information when booking
 
     ApplicationUser user = _unitOfWork.User.GetFirstOrDefault(u => u.Id == userId);
 ```
+
+
+## Stripe payment
+Register
+
+add publishable key and secret key to appsettings.json
+
+Install stripe.net
+
+config stripe in Program.cs
+```cs
+    StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKy").Get<string>();
+```
