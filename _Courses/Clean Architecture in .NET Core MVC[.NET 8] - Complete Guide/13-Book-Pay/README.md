@@ -50,3 +50,12 @@ config stripe in Program.cs
 ```cs
     StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKy").Get<string>();
 ```
+
+Card information 
+4111 1111 1111 1111
+
+
+## Process the booking
+```cs
+  public IActionResult BookingConfirmation(int bookingId)
+```

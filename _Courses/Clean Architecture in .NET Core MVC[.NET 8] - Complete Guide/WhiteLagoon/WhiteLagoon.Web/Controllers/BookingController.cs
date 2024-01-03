@@ -21,6 +21,12 @@ namespace WhiteLagoon.Web.Controllers
         }
 
         [Authorize]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [Authorize]
         public IActionResult FinalizeBooking(int villaId, DateOnly checkInDate, int nights)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
@@ -62,8 +68,8 @@ namespace WhiteLagoon.Web.Controllers
             {
                 LineItems = new List<SessionLineItemOptions>(),
                 Mode = "payment",
-                SuccessUrl = domain + $"/booking/BookingConfirmation?bookingId={booking.Id}",
-                CancelUrl = domain + $"/booking/FinalizeBooking?villaId={booking.VillaId}&checkInDate={booking.CheckInDate}&nights={booking.Nights}",
+                SuccessUrl = domain + $"booking/BookingConfirmation?bookingId={booking.Id}",
+                CancelUrl = domain + $"booking/FinalizeBooking?villaId={booking.VillaId}&checkInDate={booking.CheckInDate}&nights={booking.Nights}",
             };
             options.LineItems.Add(new SessionLineItemOptions
             {
@@ -78,7 +84,7 @@ namespace WhiteLagoon.Web.Controllers
                     }
                 },
                 Quantity = 1
-            }); 
+            });
             var service = new SessionService();
             Session session = service.Create(options);
 
@@ -93,20 +99,52 @@ namespace WhiteLagoon.Web.Controllers
         [Authorize]
         public IActionResult BookingConfirmation(int bookingId)
         {
-            Booking bookingFromDb = _unitOfWork.Booking.Get(u => u.Id == bookingId, includeProperties:"User, Villa");
-            if(bookingFromDb.Status == SD.StatusPending)
+            Booking bookingFromDb = _unitOfWork.Booking.Get(u => u.Id == bookingId, includeProperties: "User, Villa");
+            if (bookingFromDb.Status == SD.StatusPending)
             {
                 // this is a pending order,
                 var service = new SessionService();
                 Session session = service.Get(bookingFromDb.StripeSessionId);
-                if(session.PaymentStatus == "paid")
+                if (session.PaymentStatus == "paid")
                 {
-                    bookingFromDb.Status = SD.StatusApproved;
-                   // bookingFromDb.IsPaymentSuccessful = true;
-                    //bookingFromDb.PaymentDate = DateTime.Now;
+                    _unitOfWork.Booking.UpdateStatus(bookingFromDb.Id, SD.StatusApproved);
+                    _unitOfWork.Booking.UpdateStripePaymentID(bookingFromDb.Id, session.Id, session.PaymentIntentId);
                     _unitOfWork.Save();
-                }   
+                }
             }
             return View(bookingId);
         }
+
+        [Authorize]
+        public IActionResult BookingDetails(int bookingId)
+        {
+            Booking bookingFromDb = _unitOfWork.Booking.Get(u => u.Id == bookingId, includeProperties: "User, Villa");
+
+            return View(bookingFromDb);
+        }
+            #region API Calls
+        [HttpGet]
+        [Authorize]
+        public IActionResult GetAll(string status)
+        {
+            IEnumerable<Booking> objBookings;
+            if (User.IsInRole(SD.Role_Admin))
+            {
+                objBookings = _unitOfWork.Booking.GetAll(includeProperties: "User, Villa");
+            }
+            else
+            {
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+                objBookings = _unitOfWork.Booking.GetAll(u => u.UserId == userId, includeProperties: "User, Villa");
+            }
+
+            if(!string.IsNullOrEmpty(status))
+            {
+                objBookings = objBookings.Where(u => u.Status.ToLower().Equals(status.ToLower()));
+            }
+            return Json(new { data = objBookings });
+        }
+        #endregion
     }
+}
