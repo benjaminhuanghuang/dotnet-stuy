@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WhiteLagoon.Application.Services.Interface
 {
-    internal interface IVillaNumberService
+    public interface IVillaNumberService
     {
     }
 }

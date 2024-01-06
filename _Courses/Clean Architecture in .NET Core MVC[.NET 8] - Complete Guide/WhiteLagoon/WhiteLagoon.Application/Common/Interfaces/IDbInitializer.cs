@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WhiteLagoon.Application.Services.Interface
+namespace WhiteLagoon.Application.Common.Interfaces
 {
-    public class VillaService
+    public interface IDbInitializer
     {
+        void Initialize();
     }
 }

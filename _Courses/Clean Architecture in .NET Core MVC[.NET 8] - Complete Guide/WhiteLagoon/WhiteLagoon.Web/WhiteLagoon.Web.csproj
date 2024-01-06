@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\VillaImage\" />
+    <Folder Include="wwwroot\exports\" />
   </ItemGroup>
 
 </Project>
