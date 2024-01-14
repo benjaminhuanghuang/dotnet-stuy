@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyBGList.Models;
 
 namespace MyBGList.Controllers
 {

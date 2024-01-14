@@ -143,7 +143,7 @@ Add dependencies
 ```
 Microsoft.EntityFrameworkCore
 Microsoft.EntityFrameworkCore.SqlServer   // for WebApp and Plugins.DataStore.SQL
-Microsoft.EntityFrameworkCore.To      ol  s   // for WebApp and Plugins.DataStore.SQL
+Microsoft.EntityFrameworkCore.Tools   // for WebApp and Plugins.DataStore.SQL
 
 ```
 
