@@ -26,4 +26,8 @@ program.cs
 // Minimal API
 app.MapGet("/error", [EnableCors("AnyOrigin")] () =>
     Results.Problem());
-````
+```
+
+
+## DTO
+DTOs are POCO classes that can be used to expose relevant info about that object only to the requesting client. 
