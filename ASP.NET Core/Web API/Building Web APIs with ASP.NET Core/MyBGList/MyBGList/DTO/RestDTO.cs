@@ -3,7 +3,7 @@
     public class RestDTO<T>
     {
         public List<LinkDTO> Links { get; set; } = new List<LinkDTO>();
-
+        
         public int? PageIndex { get; set; }
 
         public int? PageSize { get; set; }

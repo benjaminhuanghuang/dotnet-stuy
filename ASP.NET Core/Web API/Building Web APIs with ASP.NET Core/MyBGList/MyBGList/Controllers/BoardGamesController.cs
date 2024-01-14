@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
 using MyBGList.DTO;
 using MyBGList.Models;
+using System.ComponentModel.DataAnnotations;
+using MyBGList.Migrations;
 
 namespace MyBGList.Controllers
 {
@@ -20,35 +22,28 @@ namespace MyBGList.Controllers
 
         [HttpGet(Name = "GetBoardGames")]
         [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 60)]
-        public async Task<RestDTO<BoardGame[]>> Get(
-            int pageIndex = 0,
-            int pageSize = 10,
-            string? sortColumn = "Name",
-            string? sortOrder = "ASC",
-            string? filterQuery = null)
+        public async Task<RestDTO<BoardGame[]>> Get([FromQuery] RequestDTO input)
         {
-            var query = _context.BoardGames.AsQueryable();            
-            if (!string.IsNullOrEmpty(filterQuery))                    
-                query = query.Where(b => b.Name.Contains(filterQuery));
-
-            var recordCount = await query.CountAsync();                
+            var query = _context.BoardGames.AsQueryable();
+            if (!string.IsNullOrEmpty(input.FilterQuery))
+                query = query.Where(b => b.Name.Contains(input.FilterQuery));
             query = query
-                    .OrderBy($"{sortColumn} {sortOrder}")
-                    .Skip(pageIndex * pageSize)
-                    .Take(pageSize);
+                .OrderBy($"{input.SortColumn} {input.SortOrder}")
+                .Skip(input.PageIndex * input.PageSize)
+                .Take(input.PageSize);
 
             return new RestDTO<BoardGame[]>()
             {
                 Data = await query.ToArrayAsync(),
-                PageIndex = pageIndex,
-                PageSize = pageSize,
+                PageIndex = input.PageIndex,
+                PageSize = input.PageSize,
                 RecordCount = await _context.BoardGames.CountAsync(),
                 Links = new List<LinkDTO> {
                     new LinkDTO(
                         Url.Action(
                             null,
                             "BoardGames",
-                            new { pageIndex, pageSize },
+                            new { input.PageIndex, input.PageSize },
                             Request.Scheme)!,
                         "self",
                         "GET"),
