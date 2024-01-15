@@ -41,3 +41,6 @@ The IValidatableObject interface provides an alternative way to validate a class
 ## Error handling
 
 ## Custom error messages
+
+
+## Exception handling
