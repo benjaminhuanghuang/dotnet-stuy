@@ -26,3 +26,15 @@ dotnet add ./webApi.Tests/webApi.Tests.csproj reference ./webApi/webApi.csproj
     
     dotnet test webApi.Tests/webApi.Tests.csproj
 ```
+
+## EF
+```bash
+dotnet tool install --global dotnet-ef
+
+dotnet add package Microsoft.EntityFrameworkCore.Design
+
+
+dotnet ef dbcontext scaffold "Server=localhost;Database=webapi-xunit-vscode-sln;User Id=sa;Password=Password123;" Microsoft.EntityFrameworkCore.SqlServer -o Models
+
+dotnet ef migrations add Initial
+```
