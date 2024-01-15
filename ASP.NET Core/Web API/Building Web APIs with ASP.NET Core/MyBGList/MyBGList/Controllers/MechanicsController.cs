@@ -1,31 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Dynamic.Core;
 using MyBGList.DTO;
 using MyBGList.Models;
-using System.ComponentModel.DataAnnotations;
-using MyBGList.Migrations;
+using System.Linq.Dynamic.Core;
 
 namespace MyBGList.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class BoardGamesController : Controller
+    public class MechanicsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly ILogger<BoardGamesController> _logger;
-        public BoardGamesController(ApplicationDbContext context, ILogger<BoardGamesController> logger)
+
+        private readonly ILogger<MechanicsController> _logger;
+
+        public MechanicsController(
+            ApplicationDbContext context,
+            ILogger<MechanicsController> logger)
         {
             _context = context;
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetBoardGames")]
+        [HttpGet(Name = "GetMechanics")]
         [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 60)]
-        public async Task<RestDTO<BoardGame[]>> Get(
-             [FromQuery] RequestDTO<BoardGameDTO> input)
+        public async Task<RestDTO<Mechanic[]>> Get(
+            [FromQuery] RequestDTO<MechanicDTO> input)
         {
-            var query = _context.BoardGames.AsQueryable();
+            var query = _context.Mechanics.AsQueryable();
             if (!string.IsNullOrEmpty(input.FilterQuery))
                 query = query.Where(b => b.Name.Contains(input.FilterQuery));
             var recordCount = await query.CountAsync();
@@ -34,7 +36,7 @@ namespace MyBGList.Controllers
                     .Skip(input.PageIndex * input.PageSize)
                     .Take(input.PageSize);
 
-            return new RestDTO<BoardGame[]>()
+            return new RestDTO<Mechanic[]>()
             {
                 Data = await query.ToArrayAsync(),
                 PageIndex = input.PageIndex,
@@ -44,7 +46,7 @@ namespace MyBGList.Controllers
                     new LinkDTO(
                         Url.Action(
                             null,
-                            "BoardGames",
+                            "Mechanics",
                             new { input.PageIndex, input.PageSize },
                             Request.Scheme)!,
                         "self",
@@ -53,33 +55,31 @@ namespace MyBGList.Controllers
             };
         }
 
-        [HttpPost(Name = "UpdateBoardGame")]
+        [HttpPost(Name = "UpdateMechanic")]
         [ResponseCache(NoStore = true)]
-        public async Task<RestDTO<BoardGame?>> Post(BoardGameDTO model)
+        public async Task<RestDTO<Mechanic?>> Post(MechanicDTO model)
         {
-            var boardgame = await _context.BoardGames
+            var mechanic = await _context.Mechanics
                 .Where(b => b.Id == model.Id)
                 .FirstOrDefaultAsync();
-            if (boardgame != null)
+            if (mechanic != null)
             {
                 if (!string.IsNullOrEmpty(model.Name))
-                    boardgame.Name = model.Name;
-                if (model.Year.HasValue && model.Year.Value > 0)
-                    boardgame.Year = model.Year.Value;
-                boardgame.LastModifiedDate = DateTime.Now;
-                _context.BoardGames.Update(boardgame);
+                    mechanic.Name = model.Name;
+                mechanic.LastModifiedDate = DateTime.Now;
+                _context.Mechanics.Update(mechanic);
                 await _context.SaveChangesAsync();
             };
 
-            return new RestDTO<BoardGame?>()
+            return new RestDTO<Mechanic?>()
             {
-                Data = boardgame,
+                Data = mechanic,
                 Links = new List<LinkDTO>
                 {
                     new LinkDTO(
                             Url.Action(
                                 null,
-                                "BoardGames",
+                                "Mechanics",
                                 model,
                                 Request.Scheme)!,
                             "self",
@@ -88,28 +88,28 @@ namespace MyBGList.Controllers
             };
         }
 
-        [HttpDelete(Name = "DeleteBoardGame")]
+        [HttpDelete(Name = "DeleteMechanic")]
         [ResponseCache(NoStore = true)]
-        public async Task<RestDTO<BoardGame?>> Delete(int id)
+        public async Task<RestDTO<Mechanic?>> Delete(int id)
         {
-            var boardgame = await _context.BoardGames
+            var mechanic = await _context.Mechanics
                 .Where(b => b.Id == id)
                 .FirstOrDefaultAsync();
-            if (boardgame != null)
+            if (mechanic != null)
             {
-                _context.BoardGames.Remove(boardgame);
+                _context.Mechanics.Remove(mechanic);
                 await _context.SaveChangesAsync();
             };
 
-            return new RestDTO<BoardGame?>()
+            return new RestDTO<Mechanic?>()
             {
-                Data = boardgame,
+                Data = mechanic,
                 Links = new List<LinkDTO>
                 {
                     new LinkDTO(
                             Url.Action(
                                 null,
-                                "BoardGames",
+                                "Mechanics",
                                 id,
                                 Request.Scheme)!,
                             "self",

@@ -1,31 +1,60 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
-using MyBGList.DTO;
 using MyBGList.Models;
-using System.ComponentModel.DataAnnotations;
-using MyBGList.Migrations;
+using MyBGList.Attributes;
+using MyBGList.DTO;
+using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 
 namespace MyBGList.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class BoardGamesController : Controller
+    public class DomainsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly ILogger<BoardGamesController> _logger;
-        public BoardGamesController(ApplicationDbContext context, ILogger<BoardGamesController> logger)
+
+        private readonly ILogger<DomainsController> _logger;
+
+        public DomainsController(
+            ApplicationDbContext context,
+            ILogger<DomainsController> logger)
         {
             _context = context;
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetBoardGames")]
+        [HttpGet(Name = "GetDomains")]
         [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 60)]
-        public async Task<RestDTO<BoardGame[]>> Get(
-             [FromQuery] RequestDTO<BoardGameDTO> input)
+        [ManualValidationFilter]
+        public async Task<ActionResult<RestDTO<Domain[]>>> Get(
+            [FromQuery] RequestDTO<DomainDTO> input)
         {
-            var query = _context.BoardGames.AsQueryable();
+            if (!ModelState.IsValid)
+            {
+                var details = new ValidationProblemDetails(ModelState);
+                details.Extensions["traceId"] =
+                    Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+                if (ModelState.Keys.Any(k => k == "PageSize"))
+                {
+                    details.Type =
+                        "https://tools.ietf.org/html/rfc7231#section-6.6.2";
+                    details.Status = StatusCodes.Status501NotImplemented;
+                    return new ObjectResult(details)
+                    {
+                        StatusCode = StatusCodes.Status501NotImplemented
+                    };
+                }
+                else
+                {
+                    details.Type =
+                        "https://tools.ietf.org/html/rfc7231#section-6.5.1";
+                    details.Status = StatusCodes.Status400BadRequest;
+                    return new BadRequestObjectResult(details);
+                }
+            }
+
+            var query = _context.Domains.AsQueryable();
             if (!string.IsNullOrEmpty(input.FilterQuery))
                 query = query.Where(b => b.Name.Contains(input.FilterQuery));
             var recordCount = await query.CountAsync();
@@ -34,7 +63,7 @@ namespace MyBGList.Controllers
                     .Skip(input.PageIndex * input.PageSize)
                     .Take(input.PageSize);
 
-            return new RestDTO<BoardGame[]>()
+            return new RestDTO<Domain[]>()
             {
                 Data = await query.ToArrayAsync(),
                 PageIndex = input.PageIndex,
@@ -44,7 +73,7 @@ namespace MyBGList.Controllers
                     new LinkDTO(
                         Url.Action(
                             null,
-                            "BoardGames",
+                            "Domains",
                             new { input.PageIndex, input.PageSize },
                             Request.Scheme)!,
                         "self",
@@ -53,33 +82,31 @@ namespace MyBGList.Controllers
             };
         }
 
-        [HttpPost(Name = "UpdateBoardGame")]
+        [HttpPost(Name = "UpdateDomain")]
         [ResponseCache(NoStore = true)]
-        public async Task<RestDTO<BoardGame?>> Post(BoardGameDTO model)
+        public async Task<RestDTO<Domain?>> Post(DomainDTO model)
         {
-            var boardgame = await _context.BoardGames
+            var domain = await _context.Domains
                 .Where(b => b.Id == model.Id)
                 .FirstOrDefaultAsync();
-            if (boardgame != null)
+            if (domain != null)
             {
                 if (!string.IsNullOrEmpty(model.Name))
-                    boardgame.Name = model.Name;
-                if (model.Year.HasValue && model.Year.Value > 0)
-                    boardgame.Year = model.Year.Value;
-                boardgame.LastModifiedDate = DateTime.Now;
-                _context.BoardGames.Update(boardgame);
+                    domain.Name = model.Name;
+                domain.LastModifiedDate = DateTime.Now;
+                _context.Domains.Update(domain);
                 await _context.SaveChangesAsync();
             };
 
-            return new RestDTO<BoardGame?>()
+            return new RestDTO<Domain?>()
             {
-                Data = boardgame,
+                Data = domain,
                 Links = new List<LinkDTO>
                 {
                     new LinkDTO(
                             Url.Action(
                                 null,
-                                "BoardGames",
+                                "Domains",
                                 model,
                                 Request.Scheme)!,
                             "self",
@@ -88,28 +115,28 @@ namespace MyBGList.Controllers
             };
         }
 
-        [HttpDelete(Name = "DeleteBoardGame")]
+        [HttpDelete(Name = "DeleteDomain")]
         [ResponseCache(NoStore = true)]
-        public async Task<RestDTO<BoardGame?>> Delete(int id)
+        public async Task<RestDTO<Domain?>> Delete(int id)
         {
-            var boardgame = await _context.BoardGames
+            var domain = await _context.Domains
                 .Where(b => b.Id == id)
                 .FirstOrDefaultAsync();
-            if (boardgame != null)
+            if (domain != null)
             {
-                _context.BoardGames.Remove(boardgame);
+                _context.Domains.Remove(domain);
                 await _context.SaveChangesAsync();
             };
 
-            return new RestDTO<BoardGame?>()
+            return new RestDTO<Domain?>()
             {
-                Data = boardgame,
+                Data = domain,
                 Links = new List<LinkDTO>
                 {
                     new LinkDTO(
                             Url.Action(
                                 null,
-                                "BoardGames",
+                                "Domains",
                                 id,
                                 Request.Scheme)!,
                             "self",
