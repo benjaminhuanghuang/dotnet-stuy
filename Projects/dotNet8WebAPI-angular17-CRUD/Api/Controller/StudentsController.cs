@@ -14,12 +14,12 @@ namespace Api.Controller
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class StudentController : ControllerBase
+    public class StudentsController : ControllerBase
     {
-        private readonly ILogger<StudentController> _logger;
+        private readonly ILogger<StudentsController> _logger;
         private readonly AppDbContext _context;
 
-        public StudentController(ILogger<StudentController> logger, AppDbContext context)
+        public StudentsController(ILogger<StudentsController> logger, AppDbContext context)
         {
             _logger = logger;
             _context = context;
@@ -28,7 +28,7 @@ namespace Api.Controller
         [HttpGet("SayHello")]
         public string SayHello()
         {
-            return "Hello from StudentController";
+            return "Hello from StudentsController";
         }
 
         [HttpGet("GetAllStudents")]

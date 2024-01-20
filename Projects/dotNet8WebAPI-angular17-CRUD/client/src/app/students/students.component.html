@@ -1,0 +1,18 @@
+<div class="p-10">
+  <h1 class="text-2x1 font-semibold mb-10">All Students</h1>
+  <div class="grid grid-cols-4">
+    @for (item of (students$ | async); track item) {
+    <div class="shadow rounded-md p-3">
+      <div class="flex gap-5 items-center">
+        <div class="bg-blue-500 rounded-full p-5 w-10 h-10 flex gap-10 justify-center items-center text-white font-bold">
+          {{item.name[0].toUpperCase()}}
+
+        </div>
+        <div>
+          <h1 class="text-xl">{{item.name}}</h1>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>
