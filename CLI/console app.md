@@ -7,6 +7,7 @@ dotnet run
 
 
 ## Create project
+
 ```bash
     # -o or --output as the switch to specify the folder and project name
     dotnet new console --output HelloCS
