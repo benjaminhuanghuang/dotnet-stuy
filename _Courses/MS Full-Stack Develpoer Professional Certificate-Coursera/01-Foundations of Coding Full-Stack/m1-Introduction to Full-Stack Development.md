@@ -1,5 +1,7 @@
 # M1 - Introduction to Full-Stack Development
 
+<https://www.coursera.org/learn/foundations-of-coding-full-stack/home/module/1>
+
 ## Introduction to Foundations of Coding Full-Stack
 
 ## Introduction to Full-Stack Development
